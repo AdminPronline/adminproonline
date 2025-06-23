@@ -1,651 +1,347 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+     <!-- Para favicon en .ico -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatizá tu consulta holística con IA</title>
-    <style>
-        /* Reset y configuración base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Open Sans', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333333;
-            background-color: #FFFFFF;
-        }
-
-        /* Tipografía */
-        h1 {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        p {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        /* Botones CTA */
-        .cta-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #388E3C;
-        }
-
-        /* Layout principal */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #A8D5BA 0%, #FFFFFF 100%);
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .highlight-quote {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 8px;
-            margin: 30px 0;
-            font-style: italic;
-            font-size: 18px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        /* Sección de beneficios */
-        .benefits-section {
-            background-color: #F5F5F5;
-            padding: 40px 0;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .benefit-item {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .benefit-emoji {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        .benefit-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        /* Sección de planes */
-        .plans-section {
-            background-color: #FFFFFF;
-            padding: 40px 0;
-        }
-
-        .plans-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 30px 0;
-        }
-
-        .plan-card {
-            background-color: white;
-            border: 2px solid #A8D5BA;
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .plan-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-        }
-
-        .plan-card.featured {
-            border-color: #4CAF50;
-            background: linear-gradient(135deg, #f8fff8 0%, #ffffff 100%);
-        }
-
-        .plan-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #4CAF50;
-            margin-bottom: 15px;
-        }
-
-        .plan-price {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 20px;
-        }
-
-        .plan-setup {
-            font-size: 16px;
-            color: #666666;
-            margin-bottom: 20px;
-        }
-
-        .plan-features {
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
-        .plan-features ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .plan-features li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .plan-features li:before {
-            content: "✓ ";
-            color: #4CAF50;
-            font-weight: bold;
-        }
-
-        .plan-cta {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .plan-cta:hover {
-            background-color: #388E3C;
-        }
-
-        /* Sección de presentación personal */
-        .personal-section {
-            background-color: #F5F5F5;
-            padding: 40px 0;
-        }
-
-        .personal-content {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: #A8D5BA;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            color: white;
-        }
-
-        .personal-text {
-            flex: 1;
-            font-size: 18px;
-        }
-
-        /* Testimonio */
-        .testimonial-section {
-            background-color: #FFFFFF;
-            padding: 40px 0;
-        }
-
-        .testimonial-card {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .testimonial-quote {
-            font-size: 40px;
-            color: #A8D5BA;
-            position: absolute;
-            top: 10px;
-            left: 20px;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            font-size: 18px;
-            margin: 20px 0;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
-            color: #4CAF50;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #A8D5BA;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            margin-bottom: 30px;
-        }
-
-        .footer-text {
-            font-size: 14px;
-            color: #333333;
-            margin-top: 20px;
-        }
-
-        .footer-links {
-            margin-top: 15px;
-        }
-
-        .footer-links a {
-            color: #333333;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 14px;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Formulario de contacto */
-        .contact-section {
-            background-color: #F5F5F5;
-            padding: 40px 0;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 30px auto 0;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333333;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #A8D5BA;
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #4CAF50;
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .form-submit {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .form-submit:hover {
-            background-color: #388E3C;
-        }
-
-        /* Botón CTA fijo en móvil */
-        .sticky-cta {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: none;
-            text-align: center;
-        }
-
-        .sticky-cta .cta-button {
-            width: 100%;
-            max-width: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        /* Efectos de hover mejorados */
-        .benefit-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-
-        /* Animaciones sutiles */
-        .benefit-item,
-        .plan-card,
-        .testimonial-card {
-            transition: all 0.3s ease;
-        }
-
-        /* Responsividad */
-        @media (max-width: 900px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            h1 {
-                font-size: 28px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 24px;
-            }
-            
-            h2 {
-                font-size: 18px;
-            }
-            
-            .highlight-quote {
-                padding: 20px;
-                font-size: 16px;
-            }
-            
-            .benefits-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .benefit-item {
-                padding: 20px;
-            }
-            
-            .personal-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .testimonial-card {
-                padding: 30px 20px;
-            }
-            
-            .sticky-cta {
-                display: block;
-            }
-
-            .footer-links {
-                text-align: center;
-            }
-
-            .footer-links a {
-                display: inline-block;
-                margin: 5px 10px;
-            }
-
-            .contact-form {
-                padding: 20px;
-            }
-        }
-    </style>
+    <title>AdminPro Online - Administración Inteligente para tu Negocio</title>
+    <meta name="description" content="Simplifica procesos, ahorra tiempo y potencia tu crecimiento con soluciones de administración online impulsadas por IA.">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome para iconos (ej. redes sociales, flecha scroll-up, iconos de servicios) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
+    <!-- Header -->
+    <header id="header">
         <div class="container">
-            <div class="hero-content">
-                <h1>Automatizá tu consulta holística con IA</h1>
-                <h2>Liberá tiempo y olvidate de las tareas administrativas.</h2>
-                
-                <div class="highlight-quote">
-                    "En 7 días, te instalo un sistema inteligente que gestiona citas, evita no-shows con cobro anticipado, envía recordatorios por WhatsApp y automatiza seguimientos… ¡sin que tengas que saber programar, aprender herramientas nuevas o perder tiempo en configuraciones técnicas!"
-                </div>
-                
-                <a href="https://wa.me/+34604220505?text=Hola%20Atilio%2C%20quiero%20ver%20cómo%20automatizar%20mi%20consulta%20con%20IA" class="cta-button" target="_blank">Reservá tu demo ahora</a>
+            <div class="logo">
+                <a href="#hero">AdminPro Online</a>
             </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#how-it-works">Cómo Funciona</a></li>
+                    <li><a href="#testimonials">Testimonios</a></li>
+                    <li><a href="#faq">Q&A</a></li>
+                    <li><a href="#contact-cta-icons">Contacto</a></li>
+                </ul>
+            </nav>
+            <a href="#hero" class="btn btn-contact">Contactar Ahora</a>
         </div>
     </header>
 
-    <!-- Sección de Beneficios -->
-    <section class="benefits-section">
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
         <div class="container">
-            <h2>¿Por qué elegir este sistema?</h2>
-            
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-emoji">🔔</div>
-                    <div class="benefit-title">Cobrás antes de que lleguen</div>
-                    <p>Eliminá los no-shows con cobro automático anticipado.</p>
+            <h1>Administración Inteligente: Tu Negocio al Siguiente Nivel con IA.</h1>
+            <p>Simplifica procesos, ahorra tiempo y potencia tu crecimiento con soluciones personalizadas y la eficiencia de la inteligencia artificial.</p>
+            <a href="#footer" class="btn btn-primary">¡Empieza Hoy!</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2>Nuestras Soluciones Impulsadas por IA.</h2>
+            <p class="section-description">Transformamos la gestión de tu negocio con tecnología de vanguardia, adaptada a tus necesidades.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Automatización Inteligente</h3>
+                    <p>Optimiza tareas repetitivas y procesos complejos con la precisión y velocidad de la IA.</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-emoji">💳</div>
-                    <div class="benefit-title">No más mensajes olvidados</div>
-                    <p>Recordatorios automáticos por WhatsApp sin que tengas que pensar.</p>
+                <div class="service-card">
+                    <i class="fas fa-users-cog"></i>
+                    <h3>Gestión de Clientes CRM Avanzada</h3>
+                    <p>Fideliza y organiza tus contactos, optimizando la comunicación y el seguimiento con sistemas intuitivos.</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-emoji">💬</div>
-                    <div class="benefit-title">Pacientes que vuelven solos</div>
-                    <p>Seguimiento automático que aumenta la fidelización sin esfuerzo.</p>
+                <div class="service-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Estrategias Personalizadas</h3>
+                    <p>Diseñamos e implementamos soluciones tecnológicas a medida, adaptándonos a las necesidades únicas de tu negocio.</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-emoji">⏳</div>
-                    <div class="benefit-title">Trabajás menos, ganás más</div>
-                    <p>Liberás 10+ horas semanales para más pacientes o para un descanso merecido.</p>
-                </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-emoji">🧘</div>
-                    <div class="benefit-title">Funciona aunque duermas</div>
-                    <p>Sistema 100% automático. Instalás una vez, funciona para siempre.</p>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Análisis de Datos Predictivo</h3>
+                    <p>Transforma tus datos en decisiones estratégicas con insights impulsados por IA para un crecimiento sostenido.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Planes -->
-    <section class="plans-section">
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works-section">
         <div class="container">
-            <h2>Elegí el plan perfecto para tu consulta</h2>
-            
-            <div class="plans-grid">
-                <div class="plan-card">
-                    <div class="plan-name">Plan Esencial</div>
-                    <div class="plan-price">50 €/mes</div>
-                    <div class="plan-setup">150 € instalación</div>
-                    <div class="plan-features">
-                        <ul>
-                            <li>Agenda inteligente</li>
-                            <li>Recordatorios WhatsApp</li>
-                            <li>Gestión básica de citas</li>
-                            <li>Soporte por email</li>
-                        </ul>
+            <h2>Tu Transformación Digital en 3 Pasos Simples.</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-search"></i></div>
+                    <div class="timeline-content">
+                        <h3>Paso 1: Diagnóstico Gratuito</h3>
+                        <p>Entendemos tus necesidades, analizamos tus procesos actuales y definimos tus objetivos de optimización.</p>
                     </div>
-                    <a href="https://wa.me/34604220505?text=Hola%20Atilio%2C%20quiero%20el%20plan%20Esencial%20para%20automatizar%20mi%20consulta" class="plan-cta" target="_blank">Empezar</a>
                 </div>
-
-                <div class="plan-card featured">
-                    <div class="plan-name">Plan Pro</div>
-                    <div class="plan-price">80 €/mes</div>
-                    <div class="plan-setup">250 € instalación</div>
-                    <div class="plan-features">
-                        <ul>
-                            <li>Todo del Plan Esencial</li>
-                            <li>Cobro automático</li>
-                            <li>Seguimiento post-sesión</li>
-                            <li>Reportes de gestión</li>
-                            <li>Soporte prioritario</li>
-                        </ul>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-cogs"></i></div>
+                    <div class="timeline-content">
+                        <h3>Paso 2: Implementación Ágil</h3>
+                        <p>Configuramos soluciones a medida con mínima interrupción, integrando la IA de forma eficiente en tu flujo de trabajo.</p>
                     </div>
-                    <a href="https://wa.me/34604220505?text=Hola%20Atilio%2C%20quiero%20el%20plan%20Pro%20para%20automatizar%20mi%20consulta" class="plan-cta" target="_blank">Empezar</a>
                 </div>
-
-                <div class="plan-card">
-                    <div class="plan-name">Plan VIP</div>
-                    <div class="plan-price">120 €/mes</div>
-                    <div class="plan-setup">400 € instalación</div>
-                    <div class="plan-features">
-                        <ul>
-                            <li>Todo del Plan Pro</li>
-                            <li>CRM completo</li>
-                            <li>IA para responder preguntas</li>
-                            <li>Análisis avanzado</li>
-                            <li>Soporte telefónico</li>
-                        </ul>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="timeline-content">
+                        <h3>Paso 3: Resultados Medibles</h3>
+                        <p>Observa el impacto directo en tu eficiencia, ahorro de costos y crecimiento empresarial desde el primer día.</p>
                     </div>
-                    <a href="https://wa.me/34604220505?text=Hola%20Atilio%2C%20quiero%20el%20plan%20VIP%20para%20automatizar%20mi%20consulta" class="plan-cta" target="_blank">Empezar</a>
                 </div>
+            </div>
+            <p class="pricing-note">Inversión a Medida: Solicita tu Presupuesto Personalizado y Descubre el Valor Real que la Administración Inteligente puede aportar a tu negocio.</p>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2>Lo que Dicen Nuestros Clientes Satisfechos.</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-item active">
+                    <p>"Gracias a AdminPro Online, hemos reducido nuestros tiempos de gestión en un 40% y mejorado la satisfacción del cliente. ¡Una inversión que vale la pena!"</p>
+                    <div class="client-info">
+                        <img src="https://via.placeholder.com/60/007bff/ffffff?text=LG" alt="Laura G.">
+                        <span>Laura G., CEO de TechSolutions</span>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <p>"La implementación de sus soluciones personalizadas transformó nuestra operación. Ahora somos más eficientes y competitivos."</p>
+                    <div class="client-info">
+                        <img src="https://via.placeholder.com/60/28a745/ffffff?text=JM" alt="Juan M.">
+                        <span>Juan M., Director de Operaciones</span>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Profesionalismo y resultados garantizados. AdminPro Online es el socio estratégico que todo negocio necesita para crecer."</p>
+                    <div class="client-info">
+                        <img src="https://via.placeholder.com/60/ffc107/ffffff?text=AP" alt="Ana P.">
+                        <span>Ana P., Fundadora de InnovaTech</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Presentación Personal -->
-    <section class="personal-section">
+        <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
         <div class="container">
-            <div class="personal-content">
-                <div class="avatar">👨‍💻</div>
-                <div class="personal-text">
-                    <strong>Soy Atilio.</strong> Ayudo a terapeutas holísticos a liberar tiempo y ganar más con sistemas simples de IA.
+            <h2>Preguntas Frecuentes: Aclara tus Dudas, Impulsa tu Decisión.</h2>
+            <p class="section-description">Hemos recopilado las preguntas más comunes para que tengas toda la información que necesitas antes de dar el salto hacia la eficiencia.</p>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Cómo puede la IA realmente ayudar a mi negocio de administración?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La IA de AdminPro Online automatiza tareas repetitivas como la entrada de datos, la clasificación de documentos y la gestión de citas, liberando a tu equipo para que se enfoque en actividades estratégicas. Además, ofrece análisis predictivos para optimizar la toma de decisiones y sistemas CRM inteligentes que mejoran la relación con tus clientes. Es como tener un equipo de asistentes ultra-eficientes trabajando 24/7 para ti.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Es AdminPro Online adecuado para pequeñas empresas y autónomos?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>¡Absolutamente! Nuestras soluciones están diseñadas para ser escalables y adaptables a negocios de todos los tamaños. Entendemos los desafíos únicos de las pequeñas empresas y los autónomos, y ofrecemos paquetes personalizados que te permiten acceder a la potencia de la IA sin una inversión inicial abrumadora. Nuestro objetivo es democratizar la eficiencia administrativa para que puedas competir con los grandes.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Qué tan seguro es mi negocio y mis datos con AdminPro Online?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La seguridad de tus datos es nuestra máxima prioridad. Implementamos protocolos de encriptación de última generación, firewalls robustos y auditorías de seguridad constantes para proteger tu información. Cumplimos con las normativas de protección de datos más estrictas y garantizamos la confidencialidad y la integridad de tus operaciones. Con AdminPro Online, puedes tener la tranquilidad de que tu información está en las manos más seguras.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Cómo es el proceso de implementación y cuánto tiempo toma?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nuestro proceso es ágil y diseñado para minimizar cualquier interrupción en tu negocio. Comenzamos con un diagnóstico gratuito para entender tus necesidades. Luego, nuestro equipo de expertos configura y personaliza las soluciones en un tiempo récord, generalmente en cuestión de días o pocas semanas, dependiendo de la complejidad. Te acompañamos en cada paso, asegurando una transición suave y una adopción exitosa para que veas resultados desde el primer momento.</p>
+                    </div>
                 </div>
             </div>
+            <p class="section-description">¿Aún tienes preguntas? ¡No te quedes con la duda! <a href="#footer" class="text-link">Contáctanos directamente</a> y nuestro equipo estará encantado de resolverlas.</p>
         </div>
     </section>
 
-    <!-- Testimonio -->
-    <section class="testimonial-section">
+        <!-- Contact CTA Icons Section -->
+    <section id="contact-cta-icons" class="contact-cta-icons-section">
         <div class="container">
-            <div class="testimonial-card">
-                <div class="testimonial-quote">"</div>
-                <div class="testimonial-text">
-                    Antes me pasaba horas organizando pacientes, ahora todo fluye solo. ¡Gracias Atilio!
-                </div>
-                <div class="testimonial-author">— Clara, terapeuta integrativa</div>
+            <h2>¿Listo para Transformar tu Negocio?</h2>
+            <p class="section-description">Contáctanos directamente por tu canal preferido y empecemos a construir tu futuro digital.</p>
+            <div class="cta-icons-grid">
+                <a href="https://wa.me/34614513511?text=Hola,%20me%20interesan%20sus%20servicios%20de%20administración%20online." target="_blank" class="cta-icon whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://t.me/AsistenteEjecutivoBot?text=Hola,%20me%20interesan%20sus%20servicios%20de%20administración%20online." target="_blank" class="cta-icon telegram">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>Telegram</span>
+                </a>
             </div>
-        </div>
-    </section>
-
-    <!-- Formulario de Contacto -->
-    <section class="contact-section">
-        <div class="container">
-            <h2 style="text-align: center;">¿Preferís escribir? También podés contactarme así</h2>
-            
-            <form class="contact-form" action="https://atiliosaas.app.n8n.cloud/webhook-test/formulario-terapeutas" method="POST">
-                <div class="form-group">
-                    <label for="name">Nombre completo</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Contame sobre tu consulta</label>
-                    <textarea id="message" name="message" placeholder="¿Cuántos pacientes tenés por mes? ¿Qué tareas administrativas te quitan más tiempo?" required></textarea>
-                </div>
-                
-                <button type="submit" class="form-submit">Enviar mensaje</button>
-            </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="footer">
         <div class="container">
             <div class="footer-content">
-                <h2>¿Listo para transformar tu consulta?</h2>
-                <a href="https://wa.me/+34604220505?text=Hola%20Atilio%2C%20quiero%20agendar%20mi%20demo%20gratuita%20de%2015%20minutos" class="cta-button" target="_blank">Reservá tu demo gratuita de 15 minutos</a>
+                <p>&copy; 2025 AdminPro Online | info@adminproonline.com</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
             </div>
             <div class="footer-links">
-                <a href="https://wa.me/+34604220505" target="_blank">WhatsApp</a>
-                <a href="#" onclick="alert('Política de privacidad: Respetamos tu privacidad y no compartimos tus datos con terceros.')">Política de privacidad</a>
-                <a href="#" onclick="alert('Términos: Al usar nuestros servicios aceptas nuestros términos y condiciones.')">Términos</a>
-            </div>
-            <div class="footer-text">
-                © 2025 Atilio - AdminPro Online. Todos los derechos reservados.
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Términos y Condiciones</a>
             </div>
         </div>
     </footer>
 
-    <!-- Botón CTA fijo para móvil -->
-    <div class="sticky-cta">
-        <a href="https://wa.me/+34604220505?text=Hola%20Atilio%2C%20quiero%20agendar%20mi%20demo%20gratuita%20de%2015%20minutos" class="cta-button" target="_blank">Demo Gratuita - WhatsApp</a>
+    <!-- Chatbot Placeholder -->
+    <div id="chatbot-icon" class="chatbot-icon">
+        <i class="fas fa-comments"></i>
     </div>
+    <div id="chatbot-window" class="chatbot-window">
+        <div class="chatbot-header">
+            <span>Asistente Virtual</span>
+            <button class="close-chatbot"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-body">
+            <div class="message received">Hola, ¿en qué puedo ayudarte hoy?</div>
+            <!-- Más mensajes se añadirán aquí dinámicamente -->
+        </div>
+        <div class="chatbot-footer">
+            <input type="text" placeholder="Escribe tu mensaje...">
+            <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Scroll-to-Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- Contact Form Modal -->
+    <div id="contact-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal"><i class="fas fa-times"></i></button>
+        <h2>¡Hablemos de tu Negocio!</h2>
+        <p class="modal-description">Cuéntanos tus necesidades y te ayudaremos a encontrar la solución perfecta.</p>
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="fullName">Nombre Completo:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Teléfono (Opcional):</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="message">Cuéntanos sobre tu consulta:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <!-- Honeypot field for anti-bot security -->
+            <input type="text" name="website" id="website" class="honeypot-field">
+            <button type="submit" class="btn btn-primary">Enviar Consulta</button>
+            <div id="form-message" class="form-message"></div>
+        </form>
+    </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div id="privacy-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal"><i class="fas fa-times"></i></button>
+        <h2>Política de Privacidad de AdminPro Online</h2>
+        <div class="policy-content">
+            <p>En AdminPro Online, valoramos y protegemos tu privacidad. Esta política describe cómo recopilamos, usamos y protegemos tu información personal.</p>
+            <h3>1. Información que Recopilamos</h3>
+            <ul>
+                <li>**Información de Contacto:** Nombre, dirección de correo electrónico, número de teléfono (si lo proporcionas) cuando nos contactas o solicitas nuestros servicios.</li>
+                <li>**Datos de Uso:** Información sobre cómo interactúas con nuestra web (páginas visitadas, tiempo en el sitio, etc.) a través de cookies y tecnologías similares.</li>
+            </ul>
+            <h3>2. Uso de la Información</h3>
+            <p>Utilizamos tu información para:</p>
+            <ul>
+                <li>Proveer y mejorar nuestros servicios.</li>
+                <li>Responder a tus consultas y solicitudes.</li>
+                <li>Personalizar tu experiencia en nuestra web.</li>
+                <li>Cumplir con obligaciones legales.</li>
+            </ul>
+            <h3>3. Compartir Información</h3>
+            <p>No vendemos ni alquilamos tu información personal a terceros. Podemos compartirla con:</p>
+            <ul>
+                <li>Proveedores de servicios que nos ayudan a operar nuestro negocio (ej. hosting, análisis web), siempre bajo estrictos acuerdos de confidencialidad.</li>
+                <li>Autoridades legales si es requerido por ley.</li>
+            </ul>
+            <h3>4. Seguridad de Datos</h3>
+            <p>Implementamos medidas de seguridad técnicas y organizativas para proteger tu información contra el acceso no autorizado, la alteración, divulgación o destrucción.</p>
+            <h3>5. Tus Derechos</h3>
+            <p>Tienes derecho a acceder, corregir o eliminar tu información personal. Para ejercer estos derechos, contáctanos a info@adminproonline.com.</p>
+            <h3>6. Cambios en la Política</h3>
+            <p>Podemos actualizar esta política ocasionalmente. Te notificaremos sobre cambios significativos publicando la nueva política en nuestra web.</p>
+            <p>Última actualización: 23 de junio de 2025</p>
+        </div>
+    </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div id="terms-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal"><i class="fas fa-times"></i></button>
+        <h2>Términos y Condiciones de Servicio de AdminPro Online</h2>
+        <div class="policy-content">
+            <p>Bienvenido a AdminPro Online. Al acceder y utilizar nuestros servicios, aceptas cumplir con los siguientes términos y condiciones.</p>
+            <h3>1. Aceptación de los Términos</h3>
+            <p>Al utilizar nuestros servicios, confirmas que has leído, entendido y aceptado estos Términos y Condiciones. Si no estás de acuerdo, no debes utilizar nuestros servicios.</p>
+            <h3>2. Descripción del Servicio</h3>
+            <p>AdminPro Online ofrece soluciones de administración online, incluyendo automatización de procesos, gestión de clientes y consultoría personalizada, impulsadas por inteligencia artificial.</p>
+            <h3>3. Obligaciones del Usuario</h3>
+            <ul>
+                <li>Proporcionar información precisa y completa.</li>
+                <li>Utilizar los servicios de manera legal y ética.</li>
+                <li>No intentar acceder a sistemas no autorizados o interferir con la operación de nuestros servicios.</li>
+            </ul>
+            <h3>4. Propiedad Intelectual</h3>
+            <p>Todo el contenido y software utilizado en los servicios de AdminPro Online es propiedad de AdminPro Online o sus licenciantes y está protegido por leyes de propiedad intelectual.</p>
+            <h3>5. Limitación de Responsabilidad</h3>
+            <p>AdminPro Online no será responsable por daños indirectos, incidentales, especiales o consecuentes que resulten del uso o la imposibilidad de usar nuestros servicios.</p>
+            <h3>6. Precios y Pagos</h3>
+            <p>Los precios de nuestros servicios son personalizados y se comunicarán al cliente tras una evaluación de sus necesidades. Los términos de pago se especificarán en el contrato de servicio.</p>
+            <h3>7. Modificaciones de los Términos</h3>
+            <p>Nos reservamos el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigor al ser publicadas en nuestra web. Es tu responsabilidad revisarlos periódicamente.</p>
+            <h3>8. Ley Aplicable y Jurisdicción</h3>
+            <p>Estos Términos se regirán e interpretarán de acuerdo con las leyes del país donde AdminPro Online tiene su sede principal. Cualquier disputa se someterá a la jurisdicción exclusiva de los tribunales de dicha ubicación.</p>
+            <p>Última actualización: 23 de junio de 2025</p>
+        </div>
+    </div>
+</div>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
