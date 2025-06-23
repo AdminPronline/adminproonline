@@ -1,0 +1,372 @@
+// js/script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            const headerOffset = document.querySelector('#header').offsetHeight; // Get header height
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+
+            // Update active class for navigation
+            document.querySelectorAll('.main-nav ul li a').forEach(link => {
+                link.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+
+    // Set active class on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.main-nav ul li a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - document.querySelector('#header').offsetHeight;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+
+        // Handle header background on scroll
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.style.backgroundColor = 'rgba(10, 10, 15, 0.95)';
+            header.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.5)';
+        } else {
+            header.style.backgroundColor = 'rgba(10, 10, 15, 0.9)';
+            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+        }
+    });
+
+    // Testimonial Slider
+    const testimonialItems = document.querySelectorAll('.testimonial-item');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentIndex = 0;
+
+    function showTestimonial(index) {
+        testimonialItems.forEach((item, i) => {
+            item.classList.remove('active');
+            if (i === index) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === 0) ? testimonialItems.length - 1 : currentIndex - 1;
+        showTestimonial(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === testimonialItems.length - 1) ? 0 : currentIndex + 1;
+        showTestimonial(currentIndex);
+    });
+
+    // Initial display of the first testimonial
+    showTestimonial(currentIndex);
+
+    // Auto-slide testimonials
+    let slideInterval = setInterval(() => {
+        currentIndex = (currentIndex === testimonialItems.length - 1) ? 0 : currentIndex + 1;
+        showTestimonial(currentIndex);
+    }, 7000); // Change slide every 7 seconds
+
+    // Pause auto-slide on hover
+    const testimonialSlider = document.querySelector('.testimonial-slider');
+    testimonialSlider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    testimonialSlider.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(() => {
+            currentIndex = (currentIndex === testimonialItems.length - 1) ? 0 : currentIndex + 1;
+            showTestimonial(currentIndex);
+        }, 7000);
+    });
+
+
+    // Scroll-to-Top Button functionality
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) { // Show button after scrolling 300px
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Chatbot Placeholder functionality
+    const chatbotIcon = document.getElementById('chatbot-icon');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const closeChatbotBtn = document.querySelector('.close-chatbot');
+    const chatbotInput = chatbotWindow.querySelector('input[type="text"]');
+    const chatbotSendBtn = chatbotWindow.querySelector('.chatbot-footer button');
+    const chatbotBody = chatbotWindow.querySelector('.chatbot-body');
+
+    chatbotIcon.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('open');
+    });
+
+    closeChatbotBtn.addEventListener('click', () => {
+        chatbotWindow.classList.remove('open');
+    });
+
+    // Simulate sending/receiving messages (visual only)
+    chatbotSendBtn.addEventListener('click', () => {
+        sendMessage();
+    });
+
+    chatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    function sendMessage() {
+        const messageText = chatbotInput.value.trim();
+        if (messageText !== '') {
+            const sentMessageDiv = document.createElement('div');
+            sentMessageDiv.classList.add('message', 'sent');
+            sentMessageDiv.textContent = messageText;
+            chatbotBody.appendChild(sentMessageDiv);
+            chatbotInput.value = '';
+            chatbotBody.scrollTop = chatbotBody.scrollHeight; // Scroll to bottom
+
+            // Simulate a response after a short delay
+            setTimeout(() => {
+                const receivedMessageDiv = document.createElement('div');
+                receivedMessageDiv.classList.add('message', 'received');
+                receivedMessageDiv.textContent = "Gracias por tu mensaje. Un agente se pondrá en contacto contigo pronto.";
+                chatbotBody.appendChild(receivedMessageDiv);
+                chatbotBody.scrollTop = chatbotBody.scrollHeight; // Scroll to bottom
+            }, 1500);
+        }
+    }
+
+    // Intersection Observer for "How It Works" timeline animation
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5 // Trigger when 50% of the item is visible
+    };
+
+    const timelineObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once visible
+            }
+        });
+    }, observerOptions);
+
+    timelineItems.forEach(item => {
+        timelineObserver.observe(item);
+    });
+
+    // Lazy loading for images (if any were added beyond placeholders)
+    // For this specific project, placeholders are used, but for real images:
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(img => {
+        lazyLoadObserver.observe(img);
+    });
+
+    // js/script.js (dentro de document.addEventListener('DOMContentLoaded', () => { ... }); )
+
+    // FAQ Section Accordion functionality
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            // Close all other open FAQ items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            // Toggle the clicked FAQ item
+            item.classList.toggle('active');
+        });
+    });
+
+    // js/script.js (dentro de document.addEventListener('DOMContentLoaded', () => { ... }); )
+
+    // Contact Form Modal functionality
+    const contactModal = document.getElementById('contact-modal');
+    const openContactModalBtn = document.querySelector('.btn-contact'); // Assuming this is the button in the header
+    const closeContactModalBtn = contactModal.querySelector('.close-modal');
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+    const honeypotField = document.getElementById('website'); // Honeypot field
+
+    // Function to open modal
+    function openModal(modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+    }
+
+    // Function to close modal
+    function closeModal(modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = ''; // Restore scrolling
+        formMessage.style.display = 'none'; // Hide any previous messages
+        contactForm.reset(); // Clear form fields
+    }
+
+    // Event listeners for contact modal
+    openContactModalBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default anchor behavior
+        openModal(contactModal);
+    });
+
+    closeContactModalBtn.addEventListener('click', () => {
+        closeModal(contactModal);
+    });
+
+    // Close modal if clicking outside the content
+    contactModal.addEventListener('click', (e) => {
+        if (e.target === contactModal) {
+            closeModal(contactModal);
+        }
+    });
+
+    // Form submission handling
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent default form submission
+
+        // Basic validation
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const phone = document.getElementById('phone').value.trim(); // Optional, so no 'required' check
+
+        // Anti-bot check (honeypot)
+        if (honeypotField.value !== '') {
+            console.warn('Bot detected via honeypot field.');
+            formMessage.textContent = 'Error al enviar. Por favor, inténtalo de nuevo.';
+            formMessage.className = 'form-message error';
+            formMessage.style.display = 'block';
+            return; // Stop submission
+        }
+
+        if (!fullName || !email || !message) {
+            formMessage.textContent = 'Por favor, completa todos los campos obligatorios (Nombre, Email, Consulta).';
+            formMessage.className = 'form-message error';
+            formMessage.style.display = 'block';
+            return;
+        }
+
+        // Basic email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            formMessage.textContent = 'Por favor, introduce un email válido.';
+            formMessage.className = 'form-message error';
+            formMessage.style.display = 'block';
+            return;
+        }
+
+        // If all checks pass, simulate success
+        console.log('Formulario enviado:', { fullName, email, phone, message });
+
+        // Psychological success message
+        formMessage.textContent = '¡Éxito! Tu visión es nuestra misión. Hemos recibido tu consulta y estamos ansiosos por transformar tu negocio. En breve, un experto se pondrá en contacto contigo para dar el siguiente paso hacia tu administración inteligente.';
+        formMessage.className = 'form-message success';
+        formMessage.style.display = 'block';
+
+        // Close modal and clear form after a short delay
+        setTimeout(() => {
+            closeModal(contactModal);
+        }, 5000); // Give user time to read success message
+    });
+    // js/script.js (dentro de document.addEventListener('DOMContentLoaded', () => { ... }); )
+
+    // Privacy Policy Modal functionality
+    const privacyModal = document.getElementById('privacy-modal');
+    const openPrivacyModalBtn = document.querySelector('#footer .footer-links a[href="#"]'); // Selects the first link in footer-links
+    const closePrivacyModalBtn = privacyModal.querySelector('.close-modal');
+
+    // Make sure to select the correct link for Privacy Policy.
+    // If you have multiple links, give them unique IDs or better selectors.
+    // For now, assuming the first link in footer-links is Privacy Policy.
+    if (openPrivacyModalBtn) {
+        openPrivacyModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(privacyModal);
+        });
+    }
+
+    closePrivacyModalBtn.addEventListener('click', () => {
+        closeModal(privacyModal);
+    });
+
+    privacyModal.addEventListener('click', (e) => {
+        if (e.target === privacyModal) {
+            closeModal(privacyModal);
+        }
+    });
+// js/script.js (dentro de document.addEventListener('DOMContentLoaded', () => { ... }); )
+
+    // Terms and Conditions Modal functionality
+    const termsModal = document.getElementById('terms-modal');
+    // Assuming the second link in footer-links is Terms and Conditions.
+    const openTermsModalBtn = document.querySelector('#footer .footer-links a:nth-child(2)');
+    const closeTermsModalBtn = termsModal.querySelector('.close-modal');
+
+    if (openTermsModalBtn) {
+        openTermsModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(termsModal);
+        });
+    }
+
+    closeTermsModalBtn.addEventListener('click', () => {
+        closeModal(termsModal);
+    });
+
+    termsModal.addEventListener('click', (e) => {
+        if (e.target === termsModal) {
+            closeModal(termsModal);
+        }
+    });
+
+});
+
+
