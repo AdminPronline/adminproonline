@@ -1,1 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Para favicon en .ico -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimiza tu Bienestar: Agenda tu Sesión con Psicóloga Dani Vargas</title>
+    <!-- Google Fonts: Open Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset y configuración base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #FFFFFF;
+        }
+
+        /* Tipografía */
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* Botones CTA */
+        .cta-button {
+            background-color: #6A9AC4; /* Azul de acción */
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #4A7AA0; /* Azul de acción más oscuro */
+        }
+
+        /* Layout principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #AEC6CF 0%, #FFFFFF 100% ); /* Azul principal suave a blanco */
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .highlight-quote {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Sección de beneficios */
+        .benefits-section {
+            background-color: #F5F5F5;
+            padding: 40px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .benefit-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .benefit-emoji {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .benefit-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Sección de agenda (nueva) */
+        .agenda-section {
+            background-color: #FFFFFF;
+            padding: 40px 0;
+        }
+
+        .agenda-form {
+            max-width: 600px;
+            margin: 30px auto 0;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 1px solid #AEC6CF; /* Borde suave */
+        }
+
+        /* Sección de planes */
+        .plans-section {
+            background-color: #F5F5F5; /* Cambiado a gris claro para diferenciar */
+            padding: 40px 0;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .plan-card {
+            background-color: white;
+            border: 2px solid #AEC6CF; /* Azul principal suave */
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .plan-card.featured {
+            border-color: #6A9AC4; /* Azul de acción */
+            background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%); /* Degradado sutil */
+        }
+
+        .plan-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6A9AC4; /* Azul de acción */
+            margin-bottom: 15px;
+        }
+
+        .plan-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .plan-setup {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .plan-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .plan-features li:before {
+            content: "✓ ";
+            color: #6A9AC4; /* Azul de acción */
+            font-weight: bold;
+        }
+
+        .plan-cta {
+            width: 100%;
+            background-color: #6A9AC4; /* Azul de acción */
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .plan-cta:hover {
+            background-color: #4A7AA0; /* Azul de acción más oscuro */
+        }
+
+        /* Sección de presentación personal */
+        .personal-section {
+            background-color: #FFFFFF; /* Cambiado a blanco */
+            padding: 40px 0;
+        }
+
+        .personal-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #AEC6CF; /* Azul principal suave */
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            overflow: hidden; /* Para que la imagen se ajuste al círculo */
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .personal-text {
+            flex: 1;
+            font-size: 18px;
+        }
+
+        /* Testimonio */
+        .testimonial-section {
+            background-color: #F5F5F5; /* Cambiado a gris claro */
+            padding: 40px 0;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 40px;
+            color: #AEC6CF; /* Azul principal suave */
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #6A9AC4; /* Azul de acción */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #AEC6CF; /* Azul principal suave */
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 30px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #333333;
+            margin-top: 20px;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #333333;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Formulario de contacto (para que Dani te contacte) */
+        .contact-section {
+            background-color: #FFFFFF; /* Cambiado a blanco */
+            padding: 40px 0;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 30px auto 0;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                        border: 1px solid #AEC6CF; /* Borde suave */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #AEC6CF; /* Azul principal suave */
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6A9AC4; /* Azul de acción */
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            background-color: #6A9AC4; /* Azul de acción */
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background-color: #4A7AA0; /* Azul de acción más oscuro */
+        }
+
+        /* Botón CTA fijo en móvil */
+        .sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+            text-align: center;
+        }
+
+        .sticky-cta .cta-button {
+            width: 100%;
+            max-width: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Efectos de hover mejorados */
+        .benefit-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Animaciones sutiles */
+        .benefit-item,
+        .plan-card,
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+
+        /* Responsividad */
+        @media (max-width: 900px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 18px;
+            }
+            
+            .highlight-quote {
+                padding: 20px;
+                font-size: 16px;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .benefit-item {
+                padding: 20px;
+            }
+            
+            .personal-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .testimonial-card {
+                padding: 30px 20px;
+            }
+            
+            .sticky-cta {
+                display: block;
+            }
+
+            .footer-links {
+                text-align: center;
+            }
+
+            .footer-links a {
+                display: inline-block;
+                margin: 5px 10px;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+            .agenda-form { /* Ajuste para el nuevo formulario de agenda */
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Consultá con la Psicóloga Dani Vargas: Tu Bienestar, Sin Complicaciones.</h1>
+                <h2>Agenda automática, recordatorios personalizados y seguimiento post-sesión para tu tranquilidad.</h2>
+                
+                <div class="highlight-quote">
+                    "En la consulta de la Psicóloga Dani Vargas, tu bienestar es la prioridad. Hemos optimizado el proceso para que puedas enfocarte en lo que realmente importa: tu crecimiento personal y emocional. Con un sistema intuitivo, agendar tu sesión es más fácil que nunca."
+                </div>
+                
+                <a href="#agenda-tu-sesion" class="cta-button">Reservá tu sesión en menos de 1 minuto.</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección de Beneficios (para el paciente) -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2>¿Por qué elegir la consulta de la Psicóloga Dani Vargas?</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-emoji">⏰</div>
+                    <div class="benefit-title">Agenda Flexible y Sencilla</div>
+                    <p>Encontrá el horario perfecto para vos, sin esperas ni complicaciones.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-emoji">💬</div>
+                    <div class="benefit-title">Recordatorios por WhatsApp</div>
+                    <p>Recibí notificaciones amigables para que nunca olvides tu sesión.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-emoji">💖</div>
+                    <div class="benefit-title">Seguimiento Personalizado</div>
+                    <p>Un acompañamiento continuo que te ayuda a mantener tu progreso.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-emoji">🔒</div>
+                    <div class="benefit-title">Confidencialidad y Seguridad</div>
+                    <p>Tu privacidad es nuestra prioridad en cada paso del proceso.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-emoji">🏡</div>
+                    <div class="benefit-title">Comodidad desde Casa</div>
+                    <p>Sesiones online que se adaptan a tu ritmo de vida, estés donde estés.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Agenda tu Sesión (Formulario para el paciente) -->
+    <section class="agenda-section" id="agenda-tu-sesion">
+        <div class="container">
+            <h2 style="text-align: center;">Agenda tu Sesión con la Psicóloga Dani Vargas</h2>
+            <p style="text-align: center;">Completá el siguiente formulario y nos pondremos en contacto para confirmar tu cita.</p>
+            
+            <form class="agenda-form" action="#" method="POST"> <!-- Aquí iría la URL de tu sistema de gestión de citas -->
+                <div class="form-group">
+                    <label for="patient_name">Nombre completo</label>
+                    <input type="text" id="patient_name" name="patient_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patient_email">Email</label>
+                    <input type="email" id="patient_email" name="patient_email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reason">Motivo de consulta</label>
+                    <textarea id="reason" name="reason" placeholder="Ej: Ansiedad, estrés, duelo, crecimiento personal, etc." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="preferred_day">Día preferido para la sesión</label>
+                    <input type="date" id="preferred_day" name="preferred_day">
+                </div>
+                
+                <button type="submit" class="form-submit">Enviar Solicitud de Sesión</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Sección de Soluciones de Automatización (para presentar tus servicios a Dani) -->
+    <section class="plans-section">
+        <div class="container">
+            <h2 style="text-align: center;">Para Profesionales como la Psicóloga Dani Vargas: Optimizá tu Consulta</h2>
+            <p style="text-align: center;">Este es un ejemplo de cómo una solución de automatización puede transformar la gestión de tu práctica.</p>
+            
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-name">Gestión Esencial</div>
+                    <div class="plan-price">50 €/mes</div>
+                    <div class="plan-setup">150 € instalación</div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>Agenda inteligente</li>
+                            <li>Recordatorios WhatsApp</li>
+                            <li>Gestión básica de citas</li>
+                            <li>Soporte por email</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/+34604220505?text=Hola%20Atilio%2C%20quiero%20saber%20más%20del%20plan%20Esencial%20para%20mi%20consulta" class="plan-cta" target="_blank">Consultar</a>
+                </div>
+
+                <div class="plan-card featured">
+                    <div class="plan-name">Gestión Profesional</div>
+                    <div class="plan-price">80 €/mes</div>
+                    <div class="plan-setup">250 € instalación</div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>Todo del Plan Esencial</li>
+                            <li>Cobro automático</li>
+                            <li>Seguimiento post-sesión</li>
+                            <li>Reportes de gestión</li>
+                            <li>Soporte prioritario</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/+34604220505?text=Hola%20Atilio%2C%20quiero%20saber%20más%20del%20plan%20Profesional%20para%20mi%20consulta" class="plan-cta" target="_blank">Consultar</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-name">Gestión Premium</div>
+                    <div class="plan-price">120 €/mes</div>
+                    <div class="plan-setup">400 € instalación</div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>Todo del Plan Profesional</li>
+                            <li>CRM completo</li>
+                            <li>IA para responder preguntas</li>
+                            <li>Análisis avanzado</li>
+                            <li>Soporte telefónico</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/+34604220505?text=Hola%20Atilio%2C%20quiero%20saber%20más%20del%20plan%20Premium%20para%20mi%20consulta" class="plan-cta" target="_blank">Consultar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Presentación Personal (Tuya, Atilio ) -->
+    <section class="personal-section">
+        <div class="container">
+            <div class="personal-content">
+                <div class="avatar">
+                    <!-- Asegúrate de que la imagen 'fotoatilio.jpg' esté en la misma carpeta o actualiza la ruta -->
+                    <img src="fotoatilio.jpg" alt="Foto de Atilio">
+                </div>
+                <div class="personal-text">
+                    <strong>Soy Atilio.</strong> Ayudo a profesionales de la salud y el bienestar a liberar tiempo y potenciar su práctica con sistemas de automatización inteligentes.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonio (sobre tus servicios) -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <div class="testimonial-text">
+                    "Desde que Atilio implementó el sistema de automatización en mi consulta, he ganado horas valiosas a la semana. Mis pacientes están más contentos con la facilidad de agendar y yo puedo dedicarme plenamente a mi trabajo clínico. ¡Una inversión que vale la pena!"
+                </div>
+                <div class="testimonial-author">— Dra. Laura G., Psicóloga Clínica</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto (para que Dani te contacte a ti) -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 style="text-align: center;">¿Interesada en optimizar tu consulta, Dani?</h2>
+            <p style="text-align: center;">Contactame para una demo personalizada y descubrí cómo la automatización puede transformar tu día a día.</p>
+            
+            <form class="contact-form" action="https://atiliosaas.app.n8n.cloud/webhook/formulario-terapeutas" method="POST">
+                <div class="form-group">
+                    <label for="name">Tu Nombre completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Tu Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Contame sobre tu consulta y tus necesidades</label>
+                    <textarea id="message" name="message" placeholder="¿Qué tareas administrativas te quitan más tiempo? ¿Qué te gustaría automatizar?" required></textarea>
+                </div>
+                
+                <button type="submit" class="form-submit">Enviar mensaje a Atilio</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h2>¿Lista para transformar tu consulta, Dani?</h2>
+                <a href="https://wa.me/+34604220505?text=Hola%20Atilio%2C%20quiero%20agendar%20mi%20demo%20gratuita%20de%2015%20minutos" class="cta-button" target="_blank">Reservá tu demo gratuita de 15 minutos con Atilio</a>
+            </div>
+            <div class="footer-links">
+                <a href="https://wa.me/+34604220505" target="_blank">WhatsApp</a>
+                <a href="#" onclick="alert('Política de privacidad: Respetamos tu privacidad y no compartimos tus datos con terceros.' )">Política de privacidad</a>
+                <a href="#" onclick="alert('Términos: Al usar nuestros servicios aceptas nuestros términos y condiciones.')">Términos</a>
+            </div>
+            <div class="footer-text">
+                © 2025 Atilio - AdminPro Online. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón CTA fijo para móvil -->
+    <div class="sticky-cta">
+        <a href="#agenda-tu-sesion" class="cta-button">Agenda tu Sesión con Dani Vargas</a>
+    </div>
+</body>
+</html>
+
+            
 
