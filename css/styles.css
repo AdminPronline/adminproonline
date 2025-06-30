@@ -569,6 +569,27 @@ a:hover {
     color: var(--accent-blue);
 }
 
+/* Botón CTA fijo en móvil */
+ .sticky-cta {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: none;
+    text-align: center;
+}
+
+ .sticky-cta .cta-button {
+    width: 100%;
+    max-width: none;
+    ox-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+ .sticky-cta {
+    display: block;
+ }
+
 /* Chatbot Placeholder */
 .chatbot-icon {
     position: fixed;
