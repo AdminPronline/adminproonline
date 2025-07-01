@@ -171,24 +171,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Intersection Observer for "How It Works" timeline animation
     const timelineItems = document.querySelectorAll('.timeline-item');
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5 // Trigger when 50% of the item is visible
-    };
-
-    const timelineObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Stop observing once visible
-            }
+    if (timelineItems.length > 0) {
+        // Añadir clase animate para preparar la animación
+        timelineItems.forEach(item => {
+            item.classList.add('animate');
         });
-    }, observerOptions);
 
-    timelineItems.forEach(item => {
-        timelineObserver.observe(item);
-    });
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3 // Trigger when 30% of the item is visible (más sensible)
+        };
+
+        const timelineObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.classList.remove('animate');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        timelineItems.forEach(item => {
+            timelineObserver.observe(item);
+        });
+    }
 
     // Lazy loading for images (if any were added beyond placeholders)
     // For this specific project, placeholders are used, but for real images:
@@ -367,6 +375,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Funcionalidad del Menú Hamburguesa
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const mainNav = document.getElementById('main-nav');
+
+    if (hamburgerMenu && mainNav) {
+        hamburgerMenu.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (en móvil)
+        const navLinksHamburger = document.querySelectorAll('.main-nav ul li a');
+        navLinksHamburger.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburgerMenu.classList.remove('active');
+                    mainNav.classList.remove('active');
+                }
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!hamburgerMenu.contains(e.target) && !mainNav.contains(e.target)) {
+                    hamburgerMenu.classList.remove('active');
+                    mainNav.classList.remove('active');
+                }
+            }
+        });
+
+        // Cerrar menú al cambiar el tamaño de la ventana (si se pasa a desktop)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                hamburgerMenu.classList.remove('active');
+                mainNav.classList.remove('active');
+            }
+        });
+    }
+
 });
-
-
