@@ -346,9 +346,14 @@ a:hover {
     padding: 20px 0;
     position: relative;
     width: 50%;
+    opacity: 1; /* Visible por defecto para evitar problemas */
+    transform: translateY(0); /* Sin transformación inicial */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.timeline-item.animate {
     opacity: 0; /* Para animar con JS */
     transform: translateY(50px); /* Para animar con JS */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .timeline-item.visible {
@@ -570,7 +575,7 @@ a:hover {
 }
 
 /* Botón CTA fijo en móvil */
- .sticky-cta {
+.sticky-cta {
     position: fixed;
     bottom: 20px;
     left: 20px;
@@ -580,15 +585,17 @@ a:hover {
     text-align: center;
 }
 
- .sticky-cta .cta-button {
+.sticky-cta .cta-button {
     width: 100%;
     max-width: none;
-    ox-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
- .sticky-cta {
-    display: block;
- }
+@media (max-width: 768px) {
+    .sticky-cta {
+        display: block;
+    }
+}
 
 /* Chatbot Placeholder */
 .chatbot-icon {
@@ -914,15 +921,20 @@ a:hover {
         bottom: 90px;
         height: 400px;
     }
-    .chatbot-icon, .scroll-to-top {
+    
+    .chatbot-icon {
         width: 50px;
         height: 50px;
         font-size: 1.8em;
         bottom: 20px;
         right: 20px;
-        left: 20px; /* Para que el scroll-to-top no se solape con el chatbot */
     }
+    
     .scroll-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 1.8em;
+        bottom: 20px;
         left: 20px;
     }
 }
@@ -965,12 +977,20 @@ a:hover {
         bottom: 80px;
         height: 350px;
     }
-    .chatbot-icon, .scroll-to-top {
+    
+    .chatbot-icon {
         width: 45px;
         height: 45px;
         font-size: 1.5em;
         bottom: 15px;
         right: 15px;
+    }
+    
+    .scroll-to-top {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5em;
+        bottom: 15px;
         left: 15px;
     }
 }
@@ -1386,3 +1406,122 @@ a:hover {
         font-size: 3em;
     }
 }
+
+/* Menú Hamburguesa - Estilos Responsivos */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--accent-blue);
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Media Queries para Dispositivos Móviles */
+@media (max-width: 768px) {
+    /* Mostrar menú hamburguesa */
+    .hamburger-menu {
+        display: flex;
+    }
+
+    /* Ocultar navegación principal en móvil */
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+
+    .main-nav.active {
+        left: 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 30px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-nav ul li {
+        margin: 0;
+        text-align: center;
+    }
+
+    .main-nav ul li a {
+        font-size: 1.5em;
+        padding: 15px 30px;
+        display: block;
+        border-radius: var(--border-radius);
+        transition: all var(--transition-speed) ease;
+    }
+
+    .main-nav ul li a:hover {
+        background-color: rgba(0, 255, 255, 0.1);
+        transform: scale(1.05);
+    }
+
+    /* Ajustar header para móvil */
+    #header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+
+    .logo {
+        margin-bottom: 0;
+    }
+
+    /* Ocultar botón de contacto en móvil dentro del header */
+    #header .btn-contact {
+        display: none;
+    }
+
+    /* Ajustar hero section para compensar header más pequeño */
+    .hero-section {
+        padding-top: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-nav ul li a {
+        font-size: 1.3em;
+        padding: 12px 25px;
+    }
+
+    .hamburger-menu span {
+        width: 22px;
+        height: 2px;
+    }
+}
+
