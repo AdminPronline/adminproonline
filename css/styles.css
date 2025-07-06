@@ -1582,8 +1582,9 @@ a:hover {
 
 /* Mobile Header Layout */
 @media (max-width: 992px) {
-    #header .container {
-        position: relative;
+     /* Mostrar menú hamburguesa */
+    .hamburger-menu {
+        display: flex; /* Asegura que se muestre */
     }
     
     .hamburger-menu {
@@ -1642,6 +1643,7 @@ a:hover {
     position: absolute;
     top: calc(100% + 10px); /* Debajo del botón */
     right: 0;
+    left: auto;
     background-color: var(--bg-medium);
     border: 1px solid var(--accent-blue);
     border-radius: var(--border-radius);
@@ -1705,7 +1707,7 @@ a:hover {
         top: calc(100% + 8px);
         right: 0; /* Alinea el menú desplegable a la derecha del botón */
         left: auto; /* Asegura que no haya un 'left' que lo empuje */
-        min-width: 140px; /* Aumenta el ancho mínimo para que quepan las banderas y el texto */
+        min-width: 70px; /* Aumenta el ancho mínimo para que quepan las banderas y el texto */
     }
 
     .dropdown-item {
@@ -1725,25 +1727,44 @@ a:hover {
         align-items: center;
         justify-content: space-between;
         flex-wrap: nowrap;
+        position: relative; /* Importante: el contenedor del header debe ser relativo para posicionar el dropdown */
     }
 
     .logo {
         flex: 1;
     }
 
+    /* === NUEVA REGLA PARA EL DROPDOWN EN MÓVILES === */
     .language-dropdown {
-        flex: 0 0 auto;
+        position: absolute; /* Posicionamiento absoluto dentro del #header .container */
+        right: 60px; /* Ajusta este valor. Deja espacio para el botón de hamburguesa */
+        top: 50%; /* Centra verticalmente */
+        transform: translateY(-50%); /* Ajuste fino para centrado vertical */
     }
 
     .hamburger-menu {
         flex: 0 0 auto;
-        margin-left: 10px;
+        position: absolute; /* También posicionamos el hamburguesa para control preciso */
+        right: 15px; /* Margen desde el borde derecho de la pantalla */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+     /* Ajustes específicos para el dropdown en este breakpoint */
+    .language-dropdown .dropdown-menu {
+        right: 0; /* Alinea el menú desplegable a la derecha de su botón */
+        left: auto; /* Asegura que no haya un 'left' que lo empuje */
+        min-width: 120px; /* Puedes ajustar este min-width si lo necesitas más grande */
     }
 }
 
 @media (max-width: 480px) {
     .language-dropdown {
         margin-right: 10px;
+    }
+
+    .hamburger-menu {
+        right: 10px; /* Ajusta este valor para móviles muy pequeños si es necesario */
     }
 
     .dropdown-toggle {
@@ -1756,7 +1777,7 @@ a:hover {
     }
 
     .dropdown-menu {
-        min-width: 120px; /* Ajusta también para pantallas más pequeñas si es necesario */
+        min-width: 100px; /* Ajusta también para pantallas más pequeñas si es necesario */
     }
 
     .dropdown-item {
