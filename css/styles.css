@@ -1785,3 +1785,52 @@ a:hover {
         font-size: 0.8em;
     }
 }
+
+/* Media Query para pantallas muy pequeñas (ajusta el max-width según tu prueba) */
+@media (max-width: 410px) { /* <-- AJUSTA ESTE VALOR SEGÚN TU PRUEBA */
+    /* Reducir el tamaño de la fuente del logo */
+    .logo a {
+        font-size: 1.4em; /* Reduce el tamaño del logo para que ocupe menos espacio */
+        letter-spacing: 1px; /* Opcional: ajusta el espaciado entre letras si es necesario */
+    }
+
+    /* Ajustar la posición del dropdown del idioma */
+    .language-dropdown {
+        right: 45px; /* Mueve el dropdown un poco más a la izquierda para dar espacio al logo */
+        /* Si el botón de hamburguesa también se solapa, ajusta su 'right' aquí también */
+    }
+
+    .hamburger-menu {
+        right: 10px; /* Ajusta el botón de hamburguesa si es necesario */
+    }
+
+    /* Opcional: Reducir el padding del header si el espacio es muy limitado */
+    #header {
+        padding: 15px 0; /* Reduce el padding superior/inferior del header */
+    }
+
+    /* Opcional: Reducir el tamaño del botón del dropdown si es muy grande */
+    .dropdown-toggle {
+        padding: 5px 8px; /* Reduce el padding del botón del dropdown */
+        font-size: 0.8em; /* Reduce el tamaño de la fuente del botón */
+    }
+
+    .dropdown-toggle .fa-globe {
+        font-size: 0.9em; /* Reduce el tamaño del icono del mundo */
+    }
+
+    .dropdown-menu {
+        min-width: 100px; /* Asegura que el menú desplegable sea lo suficientemente estrecho */
+    }
+
+    .dropdown-item {
+        padding: 6px 8px; /* Reduce el padding de los ítems del dropdown */
+        font-size: 0.75em; /* Reduce el tamaño de la fuente de los ítems */
+    }
+
+    .dropdown-item .flag-img {
+        width: 18px; /* Reduce el tamaño de las banderas */
+        height: 13px;
+    }
+}
+
