@@ -1790,7 +1790,7 @@ a:hover {
 @media (max-width: 410px) { /* <-- AJUSTA ESTE VALOR SEGÚN TU PRUEBA */
     /* Reducir el tamaño de la fuente del logo */
     .logo a {
-        font-size: 1.4em; /* Reduce el tamaño del logo para que ocupe menos espacio */
+        font-size: 0.9em; /* Reduce el tamaño del logo para que ocupe menos espacio */
         letter-spacing: 1px; /* Opcional: ajusta el espaciado entre letras si es necesario */
     }
 
