@@ -591,7 +591,7 @@ a:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .sticky-cta {
         display: block;
     }
@@ -821,7 +821,7 @@ a:hover {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     #header .container {
         flex-direction: column;
         text-align: center;
@@ -1078,7 +1078,7 @@ a:hover {
 }
 
 /* Responsive adjustments for FAQ */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .faq-question {
         padding: 20px 25px;
     }
@@ -1378,7 +1378,7 @@ a:hover {
 }
 
 /* Responsive adjustments for CTA icons */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .cta-icons-grid {
         gap: 30px;
     }
@@ -1439,7 +1439,7 @@ a:hover {
 }
 
 /* Media Queries para Dispositivos Móviles */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     /* Mostrar menú hamburguesa */
     .hamburger-menu {
         display: flex;
@@ -1547,7 +1547,7 @@ a:hover {
 /* Small Mobile Devices */
 
 /* Desktop Header Layout */
-@media (min-width: 769px) {
+@media (min-width: 993px) {
     #header .container {
         display: flex;
         align-items: center;
@@ -1581,7 +1581,7 @@ a:hover {
 }
 
 /* Mobile Header Layout */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     #header .container {
         position: relative;
     }
@@ -1685,7 +1685,7 @@ a:hover {
 }
 
 /* Responsive adjustments for language dropdown */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .language-dropdown {
         position: relative; /* Asegura que el menú desplegable se posicione en relación a este */
         margin-right: 15px;
@@ -1705,7 +1705,7 @@ a:hover {
         top: calc(100% + 8px);
         right: 0; /* Alinea el menú desplegable a la derecha del botón */
         left: auto; /* Asegura que no haya un 'left' que lo empuje */
-        min-width: 70px; /* Aumenta el ancho mínimo para que quepan las banderas y el texto */
+        min-width: 140px; /* Aumenta el ancho mínimo para que quepan las banderas y el texto */
     }
 
     .dropdown-item {
