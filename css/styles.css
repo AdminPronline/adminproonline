@@ -1524,4 +1524,243 @@ a:hover {
         height: 2px;
     }
 }
+    
+    /* Adjust header container for mobile */
+    #header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    
+    /* Ensure proper spacing in mobile header */
+    .logo {
+        flex: 1;
+    }
+    
+    .hamburger-menu {
+        flex: 0 0 auto;
+        margin-left: 10px;
+    }
 
+
+/* Small Mobile Devices */
+
+/* Desktop Header Layout */
+@media (min-width: 769px) {
+    #header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .logo {
+        flex: 0 0 auto;
+    }
+    
+    .language-dropdown {
+        flex: 0 0 auto;
+        order: 1;
+        margin-left: 30px; /* Ajusta este valor para alejarlo del logo */
+    }
+    
+    .main-nav {
+        flex: 1;
+        order: 2;
+        margin: 0 20px;
+    }
+    
+    .btn-contact {
+        flex: 0 0 auto;
+        order: 3;
+    }
+    
+    .hamburger-menu {
+        display: none;
+    }
+}
+
+/* Mobile Header Layout */
+@media (max-width: 768px) {
+    #header .container {
+        position: relative;
+    }
+    
+    .hamburger-menu {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+/* ===================================
+   LANGUAGE DROPDOWN STYLES
+   =================================== */
+
+.language-dropdown {
+    position: relative;
+    margin-right: 20px; /* Ajusta según sea necesario para el espaciado */
+    z-index: 1002; /* Asegura que esté por encima de otros elementos */
+}
+
+.dropdown-toggle {
+    background: none;
+    border: 2px solid var(--accent-blue);
+    color: var(--accent-blue);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.dropdown-toggle .fa-globe {
+    font-size: 1.2em;
+}
+
+.dropdown-arrow {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.language-dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px); /* Debajo del botón */
+    right: 0;
+    background-color: var(--bg-medium);
+    border: 1px solid var(--accent-blue);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    min-width: 150px;
+    z-index: 1003;
+}
+
+.language-dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    color: var(--accent-blue);
+}
+
+.dropdown-item .flag-img {
+    width: 25px;
+    height: 18px;
+    margin-right: 10px;
+    border-radius: 3px;
+    object-fit: cover;
+}
+
+/* Responsive adjustments for language dropdown */
+@media (max-width: 768px) {
+    .language-dropdown {
+        position: relative; /* Asegura que el menú desplegable se posicione en relación a este */
+        margin-right: 15px;
+        order: -1; /* Mueve el dropdown antes del menú hamburguesa */
+    }
+
+    .dropdown-toggle {
+        padding: 8px 12px;
+        font-size: 1em;
+    }
+
+    .dropdown-toggle .fa-globe {
+        font-size: 1em;
+    }
+
+    .dropdown-menu {
+        top: calc(100% + 8px);
+        right: 0; /* Alinea el menú desplegable a la derecha del botón */
+        left: auto; /* Asegura que no haya un 'left' que lo empuje */
+        min-width: 70px; /* Aumenta el ancho mínimo para que quepan las banderas y el texto */
+    }
+
+    .dropdown-item {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+
+    .dropdown-item .flag-img {
+        width: 20px;
+        height: 15px;
+        margin-right: 8px;
+    }
+
+    /* Ajuste para el header en móvil */
+    #header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .logo {
+        flex: 1;
+    }
+
+    .language-dropdown {
+        flex: 0 0 auto;
+    }
+
+    .hamburger-menu {
+        flex: 0 0 auto;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .language-dropdown {
+        margin-right: 10px;
+    }
+
+    .dropdown-toggle {
+        padding: 6px 10px;
+        font-size: 0.9em;
+    }
+
+    .dropdown-toggle .fa-globe {
+        font-size: 0.9em;
+    }
+
+    .dropdown-menu {
+        min-width: 120px; /* Ajusta también para pantallas más pequeñas si es necesario */
+    }
+
+    .dropdown-item {
+        padding: 8px 10px;
+        font-size: 0.8em;
+    }
+}
