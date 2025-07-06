@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdminPro Online - Administración Inteligente para tu Negocio</title>
     <meta name="description" content="Simplifica procesos, ahorra tiempo y potencia tu crecimiento con soluciones de administración online impulsadas por IA.">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <!-- Font Awesome para iconos (ej. redes sociales, flecha scroll-up, iconos de servicios) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -17,6 +17,25 @@
         <div class="container">
             <div class="logo">
                 <a href="#hero">AdminPro Online</a>
+            </div>
+            
+             <!-- Language Dropdown -->
+            <div class="language-dropdown">
+                <button class="dropdown-toggle" aria-label="Seleccionar idioma">
+                    <i class="fas fa-globe"></i> <!-- Icono de mundo -->
+                    <i class="fas fa-chevron-down dropdown-arrow"></i> <!-- Flecha hacia abajo -->
+                </button>
+                <div class="dropdown-menu">
+                    <a href="/es/index.html" class="dropdown-item" data-lang="es">
+                        <img src="https://flagcdn.com/w40/es.png" alt="Español" class="flag-img"> ES
+                    </a>
+                    <a href="/en/index.html" class="dropdown-item" data-lang="en">
+                        <img src="https://flagcdn.com/w40/us.png" alt="English" class="flag-img"> EN
+                    </a>
+                    <a href="/de/index.html" class="dropdown-item" data-lang="de">
+                        <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="flag-img"> DE
+                    </a>
+                </div>
             </div>
             
             <!-- Menú Hamburguesa (solo visible en móvil) -->
@@ -36,7 +55,7 @@
                     <li><a href="#contact-cta-icons">Contacto</a></li>
                 </ul>
             </nav>
-            <a href="#" class="btn btn-contact">Contactar Ahora</a>
+            <a href="#hero" class="btn btn-contact">Contactar Ahora</a>
         </div>
     </header>
 
@@ -215,9 +234,9 @@
             <div class="footer-content">
                 <p>&copy; 2025 AdminPro Online | info@adminproonline.com</p>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/admnpronline/" target="_blank" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/admnpronline/" target="_blank" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/adminpro-online-agencia-digital-apalancada-con-ia-baa502354/" target="_blank" class="social-icon linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <a href="#" class="social-icon tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
@@ -355,6 +374,7 @@
     </div>
 </div>
 
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>
+
