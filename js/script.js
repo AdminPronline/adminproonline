@@ -415,4 +415,93 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ===================================
+    // LANGUAGE DROPDOWN FUNCTIONALITY
+    // ===================================
+
+    const languageDropdown = document.querySelector('.language-dropdown');
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+    if (languageDropdown && dropdownToggle && dropdownMenu && dropdownItems.length > 0) {
+        // Function to open/close the dropdown
+        function toggleDropdown() {
+            languageDropdown.classList.toggle('active');
+            dropdownToggle.setAttribute('aria-expanded', languageDropdown.classList.contains('active'));
+        }
+
+        // Event listener for the dropdown toggle button
+        dropdownToggle.addEventListener('click', toggleDropdown);
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!languageDropdown.contains(event.target)) {
+                languageDropdown.classList.remove('active');
+                dropdownToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Handle keyboard navigation for accessibility
+        dropdownToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleDropdown();
+            } else if (e.key === 'ArrowDown' && languageDropdown.classList.contains('active')) {
+                e.preventDefault();
+                dropdownItems[0].focus();
+            }
+        });
+
+        dropdownItems.forEach((item, index) => {
+            item.setAttribute('tabindex', '0'); // Make items focusable
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click(); // Simulate click on Enter/Space
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const nextIndex = (index + 1) % dropdownItems.length;
+                    dropdownItems[nextIndex].focus();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prevIndex = (index - 1 + dropdownItems.length) % dropdownItems.length;
+                    dropdownItems[prevIndex].focus();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    languageDropdown.classList.remove('active');
+                    dropdownToggle.setAttribute('aria-expanded', 'false');
+                    dropdownToggle.focus();
+                }
+            });
+        });
+
+        // Set active language in dropdown based on current URL
+        const currentPath = window.location.pathname;
+        let currentLang = 'es'; // Default
+
+        if (currentPath.includes('/en/')) {
+            currentLang = 'en';
+        } else if (currentPath.includes('/de/')) {
+            currentLang = 'de';
+        } else if (currentPath.includes('/es/')) {
+            currentLang = 'es';
+        }
+
+        dropdownItems.forEach(item => {
+            const itemLang = item.getAttribute('data-lang');
+            if (itemLang === currentLang) {
+                item.classList.add('active');
+                item.setAttribute('aria-current', 'page');
+                // Optional: Update the toggle button to show the current language (e.g., its flag or text)
+                // For this design, we just have the globe icon, so no change needed on toggle.
+            } else {
+                item.classList.remove('active');
+                item.removeAttribute('aria-current');
+            }
+        });
+    }
+
 });
+
+    
