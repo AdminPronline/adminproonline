@@ -1787,7 +1787,7 @@ a:hover {
 }
 
 /* Media Query para pantallas muy pequeñas (ajusta el max-width según tu prueba) */
-@media (max-width: 430px) { /* <-- AJUSTA ESTE VALOR SEGÚN TU PRUEBA */
+@media (max-width: 450px) { /* <-- AJUSTA ESTE VALOR SEGÚN TU PRUEBA */
     /* Reducir el tamaño de la fuente del logo */
     .logo a {
         font-size: 1.4em; /* Reduce el tamaño del logo para que ocupe menos espacio */
