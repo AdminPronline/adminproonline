@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminPro Online - Redirecting...</title>
+    <meta name="description" content="AdminPro Online - Administración Inteligente para tu Negocio">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="js/script.js" as="script">
+    
+    <!-- SEO and Language Meta Tags -->
+    <link rel="alternate" hreflang="es" href="/es/">
+    <link rel="alternate" hreflang="en" href="/en/">
+    <link rel="alternate" hreflang="de" href="/de/">
+    <link rel="alternate" hreflang="x-default" href="/es/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AdminPro Online - Smart Administration for Your Business">
+    <meta property="og:description" content="Simplify processes, save time, and boost your growth with AI-powered online administration solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://adminproonline.es">
+    <meta property="og:image" content="https://adminproonline.es/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AdminPro Online - Smart Administration">
+    <meta name="twitter:description" content="AI-powered administration solutions for your business">
+    
+    <style>
+        /* Loading screen styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .loading-container {
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .loading-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .language-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .lang-option {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            color: #00ffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .lang-option:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+            transform: translateY(-2px);
+        }
+        
+        .redirect-info {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-top: 1rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .loading-text {
+                font-size: 1rem;
+            }
+            
+            .language-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .lang-option {
+                width: 120px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="logo">AdminPro Online</div>
+        <div class="loading-text">Detectando idioma preferido...</div>
+        <div class="spinner"></div>
+        
+        <div class="language-options">
+            <a href="/es/" class="lang-option" id="es-link">🇪🇸 Español</a>
+            <a href="/en/" class="lang-option" id="en-link">🇺🇸 English</a>
+            <a href="/de/" class="lang-option" id="de-link">🇩🇪 Deutsch</a>
+        </div>
+        
+        <div class="redirect-info">
+            Redirigiendo automáticamente en <span id="countdown">3</span> segundos...
+        </div>
+    </div>
+
+    <script>
+        // Language detection and redirection logic
+        (function() {
+            // Get browser language
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.substring(0, 2).toLowerCase();
+            
+            // Get saved preference
+            let preferredLang = null;
+            try {
+                preferredLang = localStorage.getItem('adminpro_preferred_language');
+            } catch (e) {
+                console.warn('Could not access localStorage');
+            }
+            
+            // Determine target language
+            let targetLang = 'es'; // Default to Spanish
+            
+            if (preferredLang && ['es', 'en', 'de'].includes(preferredLang)) {
+                targetLang = preferredLang;
+            } else if (['en', 'de'].includes(langCode)) {
+                targetLang = langCode;
+            }
+            
+            // Update UI to show detected language
+            const loadingText = document.querySelector('.loading-text');
+            const languageNames = {
+                'es': 'Español',
+                'en': 'English', 
+                'de': 'Deutsch'
+            };
+            
+            loadingText.textContent = `Idioma detectado: ${languageNames[targetLang]}`;
+            
+            // Highlight the target language
+            const targetLink = document.getElementById(`${targetLang}-link`);
+            if (targetLink) {
+                targetLink.style.background = 'rgba(0, 255, 255, 0.3)';
+                targetLink.style.borderColor = '#00ffff';
+            }
+            
+            // Countdown and redirect
+            let countdown = 3;
+            const countdownElement = document.getElementById('countdown');
+            
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    // Redirect to target language
+                    window.location.href = `/${targetLang}/`;
+                }
+            }, 1000);
+            
+            // Allow manual language selection to override countdown
+            document.querySelectorAll('.lang-option').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    clearInterval(countdownInterval);
+                    // Save preference
+                    const selectedLang = e.target.id.replace('-link', '');
+                    try {
+                        localStorage.setItem('adminpro_preferred_language', selectedLang);
+                    } catch (e) {
+                        console.warn('Could not save language preference');
+                    }
+                });
+            });
+            
+            // Preload the target page
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = `/${targetLang}/`;
+            document.head.appendChild(link);
+            
+        })();
+    </script>
+</body>
+</html>
+
