@@ -1,380 +1,233 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-     <!-- Para favicon en .ico -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminPro Online - Administración Inteligente para tu Negocio</title>
-    <meta name="description" content="Simplifica procesos, ahorra tiempo y potencia tu crecimiento con soluciones de administración online impulsadas por IA.">
-    <link rel="stylesheet" href="../css/styles.css">
-    <!-- Font Awesome para iconos (ej. redes sociales, flecha scroll-up, iconos de servicios) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>AdminPro Online - Redirecting...</title>
+    <meta name="description" content="AdminPro Online - Administración Inteligente para tu Negocio">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="js/script.js" as="script">
+    
+    <!-- SEO and Language Meta Tags -->
+    <link rel="alternate" hreflang="es" href="/es/">
+    <link rel="alternate" hreflang="en" href="/en/">
+    <link rel="alternate" hreflang="de" href="/de/">
+    <link rel="alternate" hreflang="x-default" href="/es/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AdminPro Online - Smart Administration for Your Business">
+    <meta property="og:description" content="Simplify processes, save time, and boost your growth with AI-powered online administration solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://adminproonline.es">
+    <meta property="og:image" content="https://adminproonline.es/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AdminPro Online - Smart Administration">
+    <meta name="twitter:description" content="AI-powered administration solutions for your business">
+    
+    <style>
+        /* Loading screen styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .loading-container {
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .loading-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .language-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .lang-option {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            color: #00ffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .lang-option:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+            transform: translateY(-2px);
+        }
+        
+        .redirect-info {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-top: 1rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .loading-text {
+                font-size: 1rem;
+            }
+            
+            .language-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .lang-option {
+                width: 120px;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header id="header">
-        <div class="container">
-            <div class="logo">
-                <a href="#hero">AdminPro Online</a>
-            </div>
+    <div class="loading-container">
+        <div class="logo">AdminPro Online</div>
+        <div class="loading-text">Detectando idioma preferido...</div>
+        <div class="spinner"></div>
+        
+        <div class="language-options">
+            <a href="/es/" class="lang-option" id="es-link">🇪🇸 Español</a>
+            <a href="/en/" class="lang-option" id="en-link">🇺🇸 English</a>
+            <a href="/de/" class="lang-option" id="de-link">🇩🇪 Deutsch</a>
+        </div>
+        
+        <div class="redirect-info">
+            Redirigiendo automáticamente en <span id="countdown">3</span> segundos...
+        </div>
+    </div>
+
+    <script>
+        // Language detection and redirection logic
+        (function() {
+            // Get browser language
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.substring(0, 2).toLowerCase();
             
-             <!-- Language Dropdown -->
-            <div class="language-dropdown">
-                <button class="dropdown-toggle" aria-label="Seleccionar idioma">
-                    <i class="fas fa-globe"></i> <!-- Icono de mundo -->
-                    <i class="fas fa-chevron-down dropdown-arrow"></i> <!-- Flecha hacia abajo -->
-                </button>
-                <div class="dropdown-menu">
-                    <a href="/es/index.html" class="dropdown-item" data-lang="es">
-                        <img src="https://flagcdn.com/w40/es.png" alt="Español" class="flag-img"> ES
-                    </a>
-                    <a href="/en/index.html" class="dropdown-item" data-lang="en">
-                        <img src="https://flagcdn.com/w40/us.png" alt="English" class="flag-img"> EN
-                    </a>
-                    <a href="/de/index.html" class="dropdown-item" data-lang="de">
-                        <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="flag-img"> DE
-                    </a>
-                </div>
-            </div>
+            // Get saved preference
+            let preferredLang = null;
+            try {
+                preferredLang = localStorage.getItem('adminpro_preferred_language');
+            } catch (e) {
+                console.warn('Could not access localStorage');
+            }
             
-            <!-- Menú Hamburguesa (solo visible en móvil) -->
-            <div class="hamburger-menu" id="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            // Determine target language
+            let targetLang = 'es'; // Default to Spanish
             
-            <nav class="main-nav" id="main-nav">
-                <ul>
-                    <li><a href="/demo/index.html">Demo</a></li>
-                    <li><a href="#services">Servicios</a></li>
-                    <li><a href="#how-it-works">Cómo Funciona</a></li>
-                    <li><a href="#testimonials">Testimonios</a></li>
-                    <li><a href="#faq">Q&A</a></li>
-                    <li><a href="#contact-cta-icons">Contacto</a></li>
-                </ul>
-            </nav>
-            <a href="#hero" class="btn btn-contact">Contactar Ahora</a>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-        <div class="container">
-            <h1>Administración Inteligente: Tu Negocio al Siguiente Nivel con IA.</h1>
-            <p>Simplifica procesos, ahorra tiempo y potencia tu crecimiento con soluciones personalizadas y la eficiencia de la inteligencia artificial.</p>
-            <a href="#footer" class="btn btn-primary">¡Empieza Hoy!</a>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2>Nuestras Soluciones Impulsadas por IA.</h2>
-            <p class="section-description">Transformamos la gestión de tu negocio con tecnología de vanguardia, adaptada a tus necesidades.</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>Automatización Inteligente</h3>
-                    <p>Optimiza tareas repetitivas y procesos complejos con la precisión y velocidad de la IA.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-users-cog"></i>
-                    <h3>Gestión de Clientes CRM Avanzada</h3>
-                    <p>Fideliza y organiza tus contactos, optimizando la comunicación y el seguimiento con sistemas intuitivos.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Estrategias Personalizadas</h3>
-                    <p>Diseñamos e implementamos soluciones tecnológicas a medida, adaptándonos a las necesidades únicas de tu negocio.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Análisis de Datos Predictivo</h3>
-                    <p>Transforma tus datos en decisiones estratégicas con insights impulsados por IA para un crecimiento sostenido.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="how-it-works-section">
-        <div class="container">
-            <h2>Tu Transformación Digital en 3 Pasos Simples.</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-icon"><i class="fas fa-search"></i></div>
-                    <div class="timeline-content">
-                        <h3>Paso 1: Diagnóstico Gratuito</h3>
-                        <p>Entendemos tus necesidades, analizamos tus procesos actuales y definimos tus objetivos de optimización.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon"><i class="fas fa-cogs"></i></div>
-                    <div class="timeline-content">
-                        <h3>Paso 2: Implementación Ágil</h3>
-                        <p>Configuramos soluciones a medida con mínima interrupción, integrando la IA de forma eficiente en tu flujo de trabajo.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon"><i class="fas fa-chart-bar"></i></div>
-                    <div class="timeline-content">
-                        <h3>Paso 3: Resultados Medibles</h3>
-                        <p>Observa el impacto directo en tu eficiencia, ahorro de costos y crecimiento empresarial desde el primer día.</p>
-                    </div>
-                </div>
-            </div>
-            <p class="pricing-note">Inversión a Medida: Solicita tu Presupuesto Personalizado y Descubre el Valor Real que la Administración Inteligente puede aportar a tu negocio.</p>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials-section">
-        <div class="container">
-            <h2>Lo que Dicen Nuestros Clientes Satisfechos.</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-item active">
-                    <p>"Gracias a AdminPro Online, hemos reducido nuestros tiempos de gestión en un 40% y mejorado la satisfacción del cliente. ¡Una inversión que vale la pena!"</p>
-                    <div class="client-info">
-                        <img src="/Laura G.jpg" alt="Laura G.">
-                        <span>Laura G., CEO de TechSolutions</span>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <p>"La implementación de sus soluciones personalizadas transformó nuestra operación. Ahora somos más eficientes y competitivos."</p>
-                    <div class="client-info">
-                        <img src="/Juan M..jpg" alt="Juan M.">
-                        <span>Juan M., Director de Operaciones</span>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <p>"Profesionalismo y resultados garantizados. AdminPro Online es el socio estratégico que todo negocio necesita para crecer."</p>
-                    <div class="client-info">
-                        <img src="/Ana P..jpg" alt="Ana P.">
-                        <span>Ana P., Fundadora de InnovaTech</span>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-nav">
-                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-        <!-- FAQ Section -->
-    <section id="faq" class="faq-section">
-        <div class="container">
-            <h2>Preguntas Frecuentes: Aclara tus Dudas, Impulsa tu Decisión.</h2>
-            <p class="section-description">Hemos recopilado las preguntas más comunes para que tengas toda la información que necesitas antes de dar el salto hacia la eficiencia.</p>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Cómo puede la IA realmente ayudar a mi negocio de administración?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>La IA de AdminPro Online automatiza tareas repetitivas como la entrada de datos, la clasificación de documentos y la gestión de citas, liberando a tu equipo para que se enfoque en actividades estratégicas. Además, ofrece análisis predictivos para optimizar la toma de decisiones y sistemas CRM inteligentes que mejoran la relación con tus clientes. Es como tener un equipo de asistentes ultra-eficientes trabajando 24/7 para ti.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Es AdminPro Online adecuado para pequeñas empresas y autónomos?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>¡Absolutamente! Nuestras soluciones están diseñadas para ser escalables y adaptables a negocios de todos los tamaños. Entendemos los desafíos únicos de las pequeñas empresas y los autónomos, y ofrecemos paquetes personalizados que te permiten acceder a la potencia de la IA sin una inversión inicial abrumadora. Nuestro objetivo es democratizar la eficiencia administrativa para que puedas competir con los grandes.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Qué tan seguro es mi negocio y mis datos con AdminPro Online?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>La seguridad de tus datos es nuestra máxima prioridad. Implementamos protocolos de encriptación de última generación, firewalls robustos y auditorías de seguridad constantes para proteger tu información. Cumplimos con las normativas de protección de datos más estrictas y garantizamos la confidencialidad y la integridad de tus operaciones. Con AdminPro Online, puedes tener la tranquilidad de que tu información está en las manos más seguras.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Cómo es el proceso de implementación y cuánto tiempo toma?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Nuestro proceso es ágil y diseñado para minimizar cualquier interrupción en tu negocio. Comenzamos con un diagnóstico gratuito para entender tus necesidades. Luego, nuestro equipo de expertos configura y personaliza las soluciones en un tiempo récord, generalmente en cuestión de días o pocas semanas, dependiendo de la complejidad. Te acompañamos en cada paso, asegurando una transición suave y una adopción exitosa para que veas resultados desde el primer momento.</p>
-                    </div>
-                </div>
-            </div>
-            <p class="section-description">¿Aún tienes preguntas? ¡No te quedes con la duda! <a href="#footer" class="text-link">Contáctanos directamente</a> y nuestro equipo estará encantado de resolverlas.</p>
-        </div>
-    </section>
-
-        <!-- Contact CTA Icons Section -->
-    <section id="contact-cta-icons" class="contact-cta-icons-section">
-        <div class="container">
-            <h2>¿Listo para Transformar tu Negocio?</h2>
-            <p class="section-description">Contáctanos directamente por tu canal preferido y empecemos a construir tu futuro digital.</p>
-            <div class="cta-icons-grid">
-                <a href="https://wa.me/34614513511?text=Hola,%20me%20interesan%20sus%20servicios%20de%20administración%20online." target="_blank" class="cta-icon whatsapp">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="https://t.me/AsistenteEjecutivoBot?text=Hola,%20me%20interesan%20sus%20servicios%20de%20administración%20online." target="_blank" class="cta-icon telegram">
-                    <i class="fab fa-telegram-plane"></i>
-                    <span>Telegram</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 AdminPro Online | info@adminproonline.com</p>
-                <div class="social-links">
-                    <a href="#" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-icon tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <a href="#">Política de Privacidad</a>
-                <a href="#">Términos y Condiciones</a>
-            </div>
-        </div>
-    </footer>
-
-     <!-- Botón CTA fijo para móvil -->
-    <div class="sticky-cta">
-        <a href="#agenda-tu-sesion" class="cta-button">Agenda tu Sesión</a>
-    </div>
-
-    <!-- Chatbot Placeholder -->
-    <div id="chatbot-icon" class="chatbot-icon">
-        <i class="fas fa-comments"></i>
-    </div>
-    <div id="chatbot-window" class="chatbot-window">
-        <div class="chatbot-header">
-            <span>Asistente Virtual</span>
-            <button class="close-chatbot"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="chatbot-body">
-            <div class="message received">Hola, ¿en qué puedo ayudarte hoy?</div>
-            <!-- Más mensajes se añadirán aquí dinámicamente -->
-        </div>
-        <div class="chatbot-footer">
-            <input type="text" placeholder="Escribe tu mensaje...">
-            <button><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-
-    <!-- Scroll-to-Top Button -->
-    <button id="scroll-to-top" class="scroll-to-top"><i class="fas fa-chevron-up"></i></button>
-
-    <!-- Contact Form Modal -->
-    <div id="contact-modal" class="modal-overlay">
-    <div class="modal-content">
-        <button class="close-modal"><i class="fas fa-times"></i></button>
-        <h2>¡Hablemos de tu Negocio!</h2>
-        <p class="modal-description">Cuéntanos tus necesidades y te ayudaremos a encontrar la solución perfecta.</p>
-        <form id="contact-form">
-            <div class="form-group">
-                <label for="fullName">Nombre Completo:</label>
-                <input type="text" id="fullName" name="fullName" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Teléfono (Opcional):</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-                <label for="message">Cuéntanos sobre tu consulta:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <!-- Honeypot field for anti-bot security -->
-            <input type="text" name="website" id="website" class="honeypot-field">
-            <button type="submit" class="btn btn-primary">Enviar Consulta</button>
-            <div id="form-message" class="form-message"></div>
-        </form>
-    </div>
-</div>
-
-<!-- Privacy Policy Modal -->
-<div id="privacy-modal" class="modal-overlay">
-    <div class="modal-content">
-        <button class="close-modal"><i class="fas fa-times"></i></button>
-        <h2>Política de Privacidad de AdminPro Online</h2>
-        <div class="policy-content">
-            <p>En AdminPro Online, valoramos y protegemos tu privacidad. Esta política describe cómo recopilamos, usamos y protegemos tu información personal.</p>
-            <h3>1. Información que Recopilamos</h3>
-            <ul>
-                <li>**Información de Contacto:** Nombre, dirección de correo electrónico, número de teléfono (si lo proporcionas) cuando nos contactas o solicitas nuestros servicios.</li>
-                <li>**Datos de Uso:** Información sobre cómo interactúas con nuestra web (páginas visitadas, tiempo en el sitio, etc.) a través de cookies y tecnologías similares.</li>
-            </ul>
-            <h3>2. Uso de la Información</h3>
-            <p>Utilizamos tu información para:</p>
-            <ul>
-                <li>Proveer y mejorar nuestros servicios.</li>
-                <li>Responder a tus consultas y solicitudes.</li>
-                <li>Personalizar tu experiencia en nuestra web.</li>
-                <li>Cumplir con obligaciones legales.</li>
-            </ul>
-            <h3>3. Compartir Información</h3>
-            <p>No vendemos ni alquilamos tu información personal a terceros. Podemos compartirla con:</p>
-            <ul>
-                <li>Proveedores de servicios que nos ayudan a operar nuestro negocio (ej. hosting, análisis web), siempre bajo estrictos acuerdos de confidencialidad.</li>
-                <li>Autoridades legales si es requerido por ley.</li>
-            </ul>
-            <h3>4. Seguridad de Datos</h3>
-            <p>Implementamos medidas de seguridad técnicas y organizativas para proteger tu información contra el acceso no autorizado, la alteración, divulgación o destrucción.</p>
-            <h3>5. Tus Derechos</h3>
-            <p>Tienes derecho a acceder, corregir o eliminar tu información personal. Para ejercer estos derechos, contáctanos a info@adminproonline.com.</p>
-            <h3>6. Cambios en la Política</h3>
-            <p>Podemos actualizar esta política ocasionalmente. Te notificaremos sobre cambios significativos publicando la nueva política en nuestra web.</p>
-            <p>Última actualización: 23 de junio de 2025</p>
-        </div>
-    </div>
-</div>
-
-<!-- Terms and Conditions Modal -->
-<div id="terms-modal" class="modal-overlay">
-    <div class="modal-content">
-        <button class="close-modal"><i class="fas fa-times"></i></button>
-        <h2>Términos y Condiciones de Servicio de AdminPro Online</h2>
-        <div class="policy-content">
-            <p>Bienvenido a AdminPro Online. Al acceder y utilizar nuestros servicios, aceptas cumplir con los siguientes términos y condiciones.</p>
-            <h3>1. Aceptación de los Términos</h3>
-            <p>Al utilizar nuestros servicios, confirmas que has leído, entendido y aceptado estos Términos y Condiciones. Si no estás de acuerdo, no debes utilizar nuestros servicios.</p>
-            <h3>2. Descripción del Servicio</h3>
-            <p>AdminPro Online ofrece soluciones de administración online, incluyendo automatización de procesos, gestión de clientes y consultoría personalizada, impulsadas por inteligencia artificial.</p>
-            <h3>3. Obligaciones del Usuario</h3>
-            <ul>
-                <li>Proporcionar información precisa y completa.</li>
-                <li>Utilizar los servicios de manera legal y ética.</li>
-                <li>No intentar acceder a sistemas no autorizados o interferir con la operación de nuestros servicios.</li>
-            </ul>
-            <h3>4. Propiedad Intelectual</h3>
-            <p>Todo el contenido y software utilizado en los servicios de AdminPro Online es propiedad de AdminPro Online o sus licenciantes y está protegido por leyes de propiedad intelectual.</p>
-            <h3>5. Limitación de Responsabilidad</h3>
-            <p>AdminPro Online no será responsable por daños indirectos, incidentales, especiales o consecuentes que resulten del uso o la imposibilidad de usar nuestros servicios.</p>
-            <h3>6. Precios y Pagos</h3>
-            <p>Los precios de nuestros servicios son personalizados y se comunicarán al cliente tras una evaluación de sus necesidades. Los términos de pago se especificarán en el contrato de servicio.</p>
-            <h3>7. Modificaciones de los Términos</h3>
-            <p>Nos reservamos el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigor al ser publicadas en nuestra web. Es tu responsabilidad revisarlos periódicamente.</p>
-            <h3>8. Ley Aplicable y Jurisdicción</h3>
-            <p>Estos Términos se regirán e interpretarán de acuerdo con las leyes del país donde AdminPro Online tiene su sede principal. Cualquier disputa se someterá a la jurisdicción exclusiva de los tribunales de dicha ubicación.</p>
-            <p>Última actualización: 23 de junio de 2025</p>
-        </div>
-    </div>
-</div>
-
-    <script src="../js/script.js"></script>
+            if (preferredLang && ['es', 'en', 'de'].includes(preferredLang)) {
+                targetLang = preferredLang;
+            } else if (['en', 'de'].includes(langCode)) {
+                targetLang = langCode;
+            }
+            
+            // Update UI to show detected language
+            const loadingText = document.querySelector('.loading-text');
+            const languageNames = {
+                'es': 'Español',
+                'en': 'English', 
+                'de': 'Deutsch'
+            };
+            
+            loadingText.textContent = `Idioma detectado: ${languageNames[targetLang]}`;
+            
+            // Highlight the target language
+            const targetLink = document.getElementById(`${targetLang}-link`);
+            if (targetLink) {
+                targetLink.style.background = 'rgba(0, 255, 255, 0.3)';
+                targetLink.style.borderColor = '#00ffff';
+            }
+            
+            // Countdown and redirect
+            let countdown = 3;
+            const countdownElement = document.getElementById('countdown');
+            
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    // Redirect to target language
+                    window.location.href = `/${targetLang}/`;
+                }
+            }, 1000);
+            
+            // Allow manual language selection to override countdown
+            document.querySelectorAll('.lang-option').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    clearInterval(countdownInterval);
+                    // Save preference
+                    const selectedLang = e.target.id.replace('-link', '');
+                    try {
+                        localStorage.setItem('adminpro_preferred_language', selectedLang);
+                    } catch (e) {
+                        console.warn('Could not save language preference');
+                    }
+                });
+            });
+            
+            // Preload the target page
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = `/${targetLang}/`;
+            document.head.appendChild(link);
+            
+        })();
+    </script>
 </body>
 </html>
 
