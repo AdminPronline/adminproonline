@@ -276,54 +276,102 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Form submission handling
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Prevent default form submission
+        // Form submission handling
+    contactForm.addEventListener('submit', async (e) => { // Añade 'async' aquí
+        e.preventDefault(); // Evita el envío por defecto del formulario
 
-        // Basic validation
-        const fullName = document.getElementById('fullName').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-        const phone = document.getElementById('phone').value.trim(); // Optional, so no 'required' check
+        // Muestra un mensaje de "enviando" y deshabilita el botón
+        formMessage.textContent = 'Enviando tu consulta...';
+        formMessage.className = 'form-message'; // Quita clases de éxito/error previas
+        formMessage.style.display = 'block';
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
 
-        // Anti-bot check (honeypot)
-        if (honeypotField.value !== '') {
+        // Recopilación de datos del formulario
+        const formData = new FormData(contactForm);
+        const data = {};
+        for (let [key, value] of formData.entries()) {
+            data[key] = value.trim(); // Elimina espacios en blanco
+        }
+
+        // Validación básica (mantén tu lógica de validación)
+        if (data.website !== '') { // Honeypot check
             console.warn('Bot detected via honeypot field.');
             formMessage.textContent = 'Error al enviar. Por favor, inténtalo de nuevo.';
             formMessage.className = 'form-message error';
             formMessage.style.display = 'block';
-            return; // Stop submission
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar Consulta';
+            return;
         }
 
-        if (!fullName || !email || !message) {
+        if (!data.fullName || !data.email || !data.message) {
             formMessage.textContent = 'Por favor, completa todos los campos obligatorios (Nombre, Email, Consulta).';
             formMessage.className = 'form-message error';
             formMessage.style.display = 'block';
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar Consulta';
             return;
         }
 
-        // Basic email format validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
+        if (!emailRegex.test(data.email)) {
             formMessage.textContent = 'Por favor, introduce un email válido.';
             formMessage.className = 'form-message error';
             formMessage.style.display = 'block';
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar Consulta';
             return;
         }
 
-        // If all checks pass, simulate success
-        console.log('Formulario enviado:', { fullName, email, phone, message });
+        // === URL DE TU WEBHOOK DE N8N ===
+        // ¡IMPORTANTE! Reemplaza 'TU_WEBHOOK_URL_DE_N8N' con la URL real de tu webhook de n8n
+        const n8nWebhookUrl = 'https://atiliosaas.app.n8n.cloud/webhook/contact-form'; 
+        // =================================
 
-        // Psychological success message
-        formMessage.textContent = '¡Éxito! Tu visión es nuestra misión. Hemos recibido tu consulta y estamos ansiosos por transformar tu negocio. En breve, un experto se pondrá en contacto contigo para dar el siguiente paso hacia tu administración inteligente.';
-        formMessage.className = 'form-message success';
-        formMessage.style.display = 'block';
+        try {
+            const response = await fetch(n8nWebhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json' // Opcional, pero buena práctica
+                },
+                body: JSON.stringify(data) // Envía los datos como JSON
+            });
 
-        // Close modal and clear form after a short delay
-        setTimeout(() => {
-            closeModal(contactModal);
-        }, 5000); // Give user time to read success message
+            if (response.ok) {
+                // Si la respuesta es exitosa (código 2xx)
+                formMessage.textContent = '¡Éxito! Tu visión es nuestra misión. Hemos recibido tu consulta y estamos ansiosos por transformar tu negocio. En breve, un experto se pondrá en contacto contigo para dar el siguiente paso hacia tu administración inteligente.';
+                formMessage.className = 'form-message success';
+                formMessage.style.display = 'block';
+                contactForm.reset(); // Limpia el formulario
+                // Cierra el modal después de un breve retraso
+                setTimeout(() => {
+                    closeModal(contactModal);
+                }, 5000);
+            } else {
+                // Si la respuesta no es exitosa
+                console.error('Error al enviar a n8n:', response.status, response.statusText);
+                const errorData = await response.json(); // Intenta leer el cuerpo del error
+                console.error('Detalles del error:', errorData);
+                formMessage.textContent = 'Hubo un problema al enviar tu consulta. Por favor, inténtalo de nuevo más tarde.';
+                formMessage.className = 'form-message error';
+                formMessage.style.display = 'block';
+            }
+        } catch (error) {
+            // Error de red o cualquier otro error durante la petición
+            console.error('Error de red o inesperado:', error);
+            formMessage.textContent = 'No se pudo conectar con el servidor. Por favor, verifica tu conexión a internet e inténtalo de nuevo.';
+            formMessage.className = 'form-message error';
+            formMessage.style.display = 'block';
+        } finally {
+            // Restablece el botón de envío
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar Consulta';
+        }
     });
+
     // js/script.js (dentro de document.addEventListener('DOMContentLoaded', () => { ... }); )
 
     // Privacy Policy Modal functionality
