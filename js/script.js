@@ -147,26 +147,91 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function sendMessage() {
-        const messageText = chatbotInput.value.trim();
-        if (messageText !== '') {
-            const sentMessageDiv = document.createElement('div');
-            sentMessageDiv.classList.add('message', 'sent');
-            sentMessageDiv.textContent = messageText;
-            chatbotBody.appendChild(sentMessageDiv);
-            chatbotInput.value = '';
-            chatbotBody.scrollTop = chatbotBody.scrollHeight; // Scroll to bottom
+    // Global variable to store conversation history for context
+    let conversationHistory = [{ role: "system", content: "Eres un asistente de atención al cliente para AdminPro Online. Tu objetivo es responder preguntas sobre nuestros servicios (automatización inteligente, gestión de clientes CRM, estrategias personalizadas, análisis de datos predictivo), calificar leads interesados en 'precios', 'demo', 'contacto' o 'presupuesto', y si el usuario pide hablar con un 'agente' o 'humano', debes indicarle que un experto se pondrá en contacto. Mantén las respuestas concisas y profesionales." }];
 
-            // Simulate a response after a short delay
-            setTimeout(() => {
+    async function sendMessage() {
+        const messageText = chatbotInput.value.trim();
+        if (messageText === '') return;
+
+        // 1. Mostrar mensaje del usuario
+        const sentMessageDiv = document.createElement('div');
+        sentMessageDiv.classList.add('message', 'sent');
+        sentMessageDiv.textContent = messageText;
+        chatbotBody.appendChild(sentMessageDiv);
+        chatbotInput.value = '';
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+
+        // Añadir mensaje del usuario al historial de conversación
+        conversationHistory.push({ role: "user", content: messageText });
+
+        // 2. Mostrar indicador de "escribiendo"
+        const typingIndicator = document.createElement('div');
+        typingIndicator.classList.add('message', 'received', 'typing-indicator');
+        typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+        chatbotBody.appendChild(typingIndicator);
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+
+        // 3. Enviar mensaje a n8n
+        const chatbotWebhookUrl = 'https://atiliosaas.app.n8n.cloud/webhook-test/chatbot'; // ¡REEMPLAZA CON TU URL DE WEBHOOK DE N8N!
+
+        try {
+            const response = await fetch(chatbotWebhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: messageText,
+                    history: conversationHistory // Envía el historial para contexto
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const botResponse = data.response || "Lo siento, no pude obtener una respuesta en este momento.";
+
+                // Eliminar indicador de "escribiendo"
+                chatbotBody.removeChild(typingIndicator);
+
+                // Mostrar respuesta del bot
                 const receivedMessageDiv = document.createElement('div');
                 receivedMessageDiv.classList.add('message', 'received');
-                receivedMessageDiv.textContent = "Gracias por tu mensaje. Un agente se pondrá en contacto contigo pronto.";
+                receivedMessageDiv.textContent = botResponse;
                 chatbotBody.appendChild(receivedMessageDiv);
-                chatbotBody.scrollTop = chatbotBody.scrollHeight; // Scroll to bottom
-            }, 1500);
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+
+                // Añadir respuesta del bot al historial de conversación
+                conversationHistory.push({ role: "assistant", content: botResponse });
+
+            } else {
+                console.error('Error al conectar con el chatbot de n8n:', response.status, response.statusText);
+                const errorData = await response.json();
+                console.error('Detalles del error:', errorData);
+
+                // Eliminar indicador de "escribiendo"
+                chatbotBody.removeChild(typingIndicator);
+
+                const receivedMessageDiv = document.createElement('div');
+                receivedMessageDiv.classList.add('message', 'received');
+                receivedMessageDiv.textContent = "Lo siento, hubo un problema al conectar con el asistente. Por favor, inténtalo de nuevo.";
+                chatbotBody.appendChild(receivedMessageDiv);
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            }
+        } catch (error) {
+            console.error('Error de red o inesperado al enviar mensaje al chatbot:', error);
+
+            // Eliminar indicador de "escribiendo"
+            chatbotBody.removeChild(typingIndicator);
+
+            const receivedMessageDiv = document.createElement('div');
+            receivedMessageDiv.classList.add('message', 'received');
+            receivedMessageDiv.textContent = "No se pudo conectar con el asistente. Verifica tu conexión a internet.";
+            chatbotBody.appendChild(receivedMessageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
         }
     }
+
 
     // Intersection Observer for "How It Works" timeline animation
     const timelineItems = document.querySelectorAll('.timeline-item');
