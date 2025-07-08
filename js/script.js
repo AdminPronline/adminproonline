@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // === URL DE TU WEBHOOK DE N8N ===
         // ¡IMPORTANTE! Reemplaza 'TU_WEBHOOK_URL_DE_N8N' con la URL real de tu webhook de n8n
-        const n8nWebhookUrl = 'https://atiliosaas.app.n8n.cloud/webhook-test/contact-form'; 
+        const n8nWebhookUrl = 'https://atiliosaas.app.n8n.cloud/webhook/contact-form'; 
         // =================================
 
         try {
