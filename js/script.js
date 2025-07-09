@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. Enviar mensaje a la API de chat de n8n
     // ¡IMPORTANTE! Reemplaza 'URL_BASE_DE_TU_INSTANCIA_N8N' con la URL real de tu n8n
     // Ej: 'https://your-n8n-instance.com' o 'http://localhost:5678'
-    const n8nChatApiUrl = 'URL_BASE_DE_TU_INSTANCIA_N8N/api/v1/chat';
+    const n8nChatApiUrl = 'https://atiliosaas.app.n8n.cloud/webhook/3223efb9-b5c0-4688-9db9-5664f8f88ef6/chat';
 
     // Generar un ID de sesión único para esta conversación
     // Esto es CRUCIAL para que n8n pueda usar la memoria del chat
