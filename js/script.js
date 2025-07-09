@@ -172,66 +172,78 @@ document.addEventListener('DOMContentLoaded', () => {
         chatbotBody.appendChild(typingIndicator);
         chatbotBody.scrollTop = chatbotBody.scrollHeight;
 
-        // 3. Enviar mensaje a n8n
-        const chatbotWebhookUrl = 'https://atiliosaas.app.n8n.cloud/webhook-test/chatbot'; // ¡REEMPLAZA CON TU URL DE WEBHOOK DE N8N!
+        // 3. Enviar mensaje a la API de chat de n8n
+    // ¡IMPORTANTE! Reemplaza 'URL_BASE_DE_TU_INSTANCIA_N8N' con la URL real de tu n8n
+    // Ej: 'https://your-n8n-instance.com' o 'http://localhost:5678'
+    const n8nChatApiUrl = 'URL_BASE_DE_TU_INSTANCIA_N8N/api/v1/chat';
 
-        try {
-            const response = await fetch(chatbotWebhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: messageText,
-                    history: conversationHistory // Envía el historial para contexto
-                })
-            });
+    // Generar un ID de sesión único para esta conversación
+    // Esto es CRUCIAL para que n8n pueda usar la memoria del chat
+    let sessionId = localStorage.getItem('n8n_chat_session_id' );
+    if (!sessionId) {
+        sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('n8n_chat_session_id', sessionId);
+    }
 
-            if (response.ok) {
-                const data = await response.json();
-                const botResponse = data.response || "Lo siento, no pude obtener una respuesta en este momento.";
+    try {
+        const response = await fetch(n8nChatApiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // No necesitas Access-Control-Allow-Origin aquí, n8n lo maneja
+            },
+            body: JSON.stringify({
+                message: messageText,
+                chatType: 'n8n Chat', // Indica a n8n que es un chat de n8n
+                chatId: sessionId, // ID de la sesión para la memoria
+                // No necesitas enviar 'history' desde aquí, n8n lo gestiona con la memoria
+            })
+        });
 
-                // Eliminar indicador de "escribiendo"
-                chatbotBody.removeChild(typingIndicator);
+        if (response.ok) {
+            const data = await response.json();
+            const botResponse = data.response || "Lo siento, no pude obtener una respuesta en este momento.";
 
-                // Mostrar respuesta del bot
-                const receivedMessageDiv = document.createElement('div');
-                receivedMessageDiv.classList.add('message', 'received');
-                receivedMessageDiv.textContent = botResponse;
-                chatbotBody.appendChild(receivedMessageDiv);
-                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            // Eliminar indicador de "escribiendo"
+            chatbotBody.removeChild(typingIndicator);
 
-                // Añadir respuesta del bot al historial de conversación
-                conversationHistory.push({ role: "assistant", content: botResponse });
+            // Mostrar respuesta del bot
+            const receivedMessageDiv = document.createElement('div');
+            receivedMessageDiv.classList.add('message', 'received');
+            receivedMessageDiv.textContent = botResponse;
+            chatbotBody.appendChild(receivedMessageDiv);
+            chatbotBody.scrollTop = chatbotBody.body.scrollHeight;
 
-            } else {
-                console.error('Error al conectar con el chatbot de n8n:', response.status, response.statusText);
-                const errorData = await response.json();
-                console.error('Detalles del error:', errorData);
+            // Añadir respuesta del bot al historial de conversación (para la UI local)
+            conversationHistory.push({ role: "assistant", content: botResponse });
 
-                // Eliminar indicador de "escribiendo"
-                chatbotBody.removeChild(typingIndicator);
-
-                const receivedMessageDiv = document.createElement('div');
-                receivedMessageDiv.classList.add('message', 'received');
-                receivedMessageDiv.textContent = "Lo siento, hubo un problema al conectar con el asistente. Por favor, inténtalo de nuevo.";
-                chatbotBody.appendChild(receivedMessageDiv);
-                chatbotBody.scrollTop = chatbotBody.scrollHeight;
-            }
-        } catch (error) {
-            console.error('Error de red o inesperado al enviar mensaje al chatbot:', error);
+        } else {
+            console.error('Error al conectar con la API de chat de n8n:', response.status, response.statusText);
+            const errorData = await response.json();
+            console.error('Detalles del error:', errorData);
 
             // Eliminar indicador de "escribiendo"
             chatbotBody.removeChild(typingIndicator);
 
             const receivedMessageDiv = document.createElement('div');
             receivedMessageDiv.classList.add('message', 'received');
-            receivedMessageDiv.textContent = "No se pudo conectar con el asistente. Verifica tu conexión a internet.";
+            receivedMessageDiv.textContent = "Lo siento, hubo un problema al conectar con el asistente. Por favor, inténtalo de nuevo.";
             chatbotBody.appendChild(receivedMessageDiv);
             chatbotBody.scrollTop = chatbotBody.scrollHeight;
         }
-    }
+    } catch (error) {
+        console.error('Error de red o inesperado al enviar mensaje al chatbot:', error);
 
+        // Eliminar indicador de "escribiendo"
+        chatbotBody.removeChild(typingIndicator);
+
+        const receivedMessageDiv = document.createElement('div');
+        receivedMessageDiv.classList.add('message', 'received');
+        receivedMessageDiv.textContent = "No se pudo conectar con el asistente. Verifica tu conexión a internet.";
+        chatbotBody.appendChild(receivedMessageDiv);
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }
+}
 
     // Intersection Observer for "How It Works" timeline animation
     const timelineItems = document.querySelectorAll('.timeline-item');
