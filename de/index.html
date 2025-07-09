@@ -252,25 +252,6 @@
         <a href="#termin-vereinbaren" class="cta-button">Termin vereinbaren</a>
     </div>
 
-    <!-- Chatbot Placeholder -->
-    <div id="chatbot-icon" class="chatbot-icon">
-        <i class="fas fa-comments"></i>
-    </div>
-    <div id="chatbot-window" class="chatbot-window">
-        <div class="chatbot-header">
-            <span>Virtueller Assistent</span>
-            <button class="close-chatbot"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="chatbot-body">
-            <div class="message received">Hallo, wie kann ich Ihnen heute helfen?</div>
-            <!-- Weitere Nachrichten werden hier dynamisch hinzugefügt -->
-        </div>
-        <div class="chatbot-footer">
-            <input type="text" placeholder="Geben Sie Ihre Nachricht ein...">
-            <button><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-
     <!-- Scroll-to-Top Button -->
     <button id="scroll-to-top" class="scroll-to-top"><i class="fas fa-chevron-up"></i></button>
 
@@ -379,6 +360,32 @@
      
      <!-- Tu script.js principal -->
     <script src="../js/script.js"></script>
+
+<!-- Widget Configuration -->
+<script>
+    window.ChatWidgetConfig = {
+        webhook: {
+            url: 'https://atiliosaas.app.n8n.cloud/webhook/3223efb9-b5c0-4688-9db9-5664f8f88ef6/chat/', // Dies ist NICHT die URL eines spezifischen Webhooks. Es ist die Basis-URL Ihrer n8n-Instanz. Wenn Sie beispielsweise n8n unter https://mi-n8n.cloud aufrufen, ist dies die URL, die Sie eingeben sollten. Wenn es http://localhost:5678 ist, dann ist es das.
+            route: 'chat' // Dies ist die Standardroute für n8n Chat
+        },
+        branding: {
+            logo: 'https://www.adminproonline.es/AdminPro-Logo.jpeg', // Ersetzen Sie dies durch die tatsächliche URL Ihres Logos
+            name: 'AdminPro Online', // Der Name Ihres Unternehmens
+            welcomeText: 'Hallo 👋, ich bin Alba, wie kann ich Ihnen heute helfen?', // Willkommensnachricht
+            responseTimeText: 'Wir antworten normalerweise bald' // Antwortzeit
+        },
+        style: {
+            primaryColor: '#00FFFF', // Primärfarbe (Ihr Akzent-Blau )
+            secondaryColor: '#00FF7F', // Sekundärfarbe (Ihr Akzent-Grün)
+            position: 'right', // Widget-Position (rechts oder links)
+            backgroundColor: '#1A1A2E', // Widget-Hintergrund (Ihr bg-medium)
+            fontColor: '#E0E0E0' // Schriftfarbe für Nachrichten (Ihr Text-Hell)
+        }
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/gh/WayneSimpson/n8n-chatbot-template@ba944c3/chat-widget.js"></script>
+<!-- Widget Script -->
+     
 </body>
 </html>
 
