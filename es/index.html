@@ -378,6 +378,32 @@
      
      <!-- Tu script.js principal -->
      <script src="../js/script.js"></script>
+
+<!-- Widget Configuration -->
+<script>
+    window.ChatWidgetConfig = {
+        webhook: {
+            url: 'https://atiliosaas.app.n8n.cloud/webhook/3223efb9-b5c0-4688-9db9-5664f8f88ef6/chat/', // This is NOT the URL of a specific Webhook. It's the base URL of your n8n instance. For example, if you access n8n at https://mi-n8n.cloud, that's the URL you should put. If it's http://localhost:5678, that's it.
+            route: 'chat' // This is the default route for n8n Chat
+        },
+        branding: {
+            logo: 'https://www.adminproonline.es/AdminPro-Logo.jpeg', // Replace with the actual URL of your logo
+            name: 'AdminPro Online', // Your company name
+            welcomeText: 'Hello 👋, I am Alba, how can I help you today?', // Welcome Message
+            responseTimeText: 'We usually respond soon' // Response time
+        },
+        style: {
+            primaryColor: '#00FFFF', // Primary color (your accent-blue )
+            secondaryColor: '#00FF7F', // Secondary color (your accent-green)
+            position: 'right', // Widget position (right or left)
+            backgroundColor: '#1A1A2E', // Widget background (your bg-medium)
+            fontColor: '#E0E0E0' // Font color for messages (your text-light)
+        }
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/gh/WayneSimpson/n8n-chatbot-template@ba944c3/chat-widget.js"></script>
+<!-- Widget Script -->
+     
 </body>
 </html>
 
