@@ -206,25 +206,25 @@ a:hover {
     width: 100%;
 }
 
-/* Hero Section */
-/* En css/styles.css */
+/* Hero Section  */
+.hero-section {
+    position: relative; /* Necesario para el posicionamiento del overlay */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 100px; /* Para compensar el header fijo */
+    overflow: hidden; /* Oculta partes del overlay que se salgan */
 
-.hero-section h1 {
-    font-size: 4.5em;
-    margin-bottom: 25px;
-    background: var(--gradient-hero);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* Ajustes para mayor nitidez */
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6), /* Sombra más definida */
-                 0 0 20px rgba(0, 255, 255, 0.3); /* Sombra más suave para el resplandor */
-    animation: text-glow 3s infinite alternate;
-    /* Propiedades para mejorar el renderizado de la fuente */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    /* --- ESTILOS DE LA IMAGEN DE FONDO --- */
+    background-image: url('../img/hero_image.png'); /* Ruta a tu imagen */
+    background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+    background-position: center center; /* Centra la imagen */
+    background-attachment: fixed; /* ¡Este es el truco para el efecto Parallax! */
 }
 
+/* --- EFECTO DE SUPERPOSICIÓN (OVERLAY) --- */
 .hero-section::before {
     content: '';
     position: absolute;
@@ -232,22 +232,22 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
-    animation: pulse-glow 8s infinite alternate;
-    z-index: 1;
+    /* Gradiente oscuro que se desvanece hacia el centro para enfocar la atención */
+    background: radial-gradient(ellipse at center, 
+                                rgba(10, 10, 15, 0.6) 0%,  /* Menos oscuro en el centro */
+                                rgba(10, 10, 15, 0.9) 70%, /* Más oscuro en los bordes */
+                                var(--bg-dark) 100%);     /* Se fusiona con el fondo oscuro */
+    z-index: 1; /* Se coloca entre el fondo y el contenido */
 }
 
-@keyframes text-glow {
-    0% { text-shadow: 0 0 10px var(--accent-blue), 0 0 20px rgba(0, 255, 255, 0.3); }
-    100% { text-shadow: 0 0 20px var(--accent-blue), 0 0 30px var(--accent-purple), 0 0 40px rgba(138, 43, 226, 0.2); }
-}
-
+/* Aseguramos que el contenido (título, botón) esté por encima del overlay */
 .hero-section .container {
     position: relative;
     z-index: 2;
     max-width: 900px;
 }
 
+/* Mantenemos los estilos del título y el párrafo como estaban */
 .hero-section h1 {
     font-size: 4.5em;
     margin-bottom: 25px;
@@ -255,11 +255,9 @@ a:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: text-glow 3s infinite alternate;
-}
-
-@keyframes text-glow {
-    0% { text-shadow: 0 0 10px var(--accent-blue); }
-    100% { text-shadow: 0 0 20px var(--accent-blue), 0 0 30px var(--accent-purple); }
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 .hero-section p {
@@ -268,7 +266,15 @@ a:hover {
     margin: 0 auto 40px;
     color: var(--text-light);
     opacity: 0.9;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7); /* Sombra sutil para mejorar legibilidad sobre la imagen */
 }
+
+/* Mantenemos la animación del texto */
+@keyframes text-glow {
+    0% { text-shadow: 0 0 10px var(--accent-blue), 0 0 20px rgba(0, 255, 255, 0.3); }
+    100% { text-shadow: 0 0 20px var(--accent-blue), 0 0 30px var(--accent-purple), 0 0 40px rgba(138, 43, 226, 0.2); }
+}
+
 
 /* Services Section */
 .services-section {
